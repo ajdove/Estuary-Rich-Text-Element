@@ -281,6 +281,7 @@ padding: 2px 8px 2px 8px;
 	display: inline-block;
 	width: 88px;
 	vertical-align: middle;
+	color: var(--toolbar-caption-color);
 	background-color: var(--background-theme-color);
 }
 .table_spec_caption label{
