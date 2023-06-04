@@ -77,8 +77,9 @@ The file "estrte_form.html" contains the rich text element and the associated to
 Any features that are not required for your project can be deleted or commented out.
 
 The file "css/estrte_style.css" contains the formatting styles for the rich text element. These can be edited to suit your particular requirements. The settings in the ":root" selector at the top of the file are general settings for the whole project. These are the settings which you will most likely want to edit. Any edits in the :root selector must maintain the same format so that they can be read by other settings in the css file.
-Other indeividual settings can be edited in the css file but always be careful.
+Other individual settings can be edited in the css file but always be careful.
  To make he dropdown sections on the toolbar automatically: set "display:inline-block" on the relevant selectors.
+To change the images displaying in the toolbar simply replace The image files in the "est_rte/images" . Make sure of course that they are of similar size to the existing ones.
 
 
 

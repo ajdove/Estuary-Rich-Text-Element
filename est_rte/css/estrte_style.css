@@ -15,6 +15,7 @@
   --table-cell-padding: 8px;
   --mobile-table-cell-padding: 8px;
   --toolbar-caption-color: #464e54;
+  --toolbar-background-color:#ffffff;
   --select-border: #464e54;
   --select-focus: blue;
   --select-arrow: var(--select-border);
@@ -60,6 +61,7 @@ p{
 	font-size: var(--toolbar-font-size);
 	font-family: var(--master-font-family);
     border: var(--toolbar-border);
+    background-color: var(--toolbar-background-color);
 	margin-bottom: 4px;
 	
 }
@@ -68,7 +70,7 @@ p{
 }
 #sourceText{ /* when show html is selected */
     font-family: var(--master-font-family);
-    overflow-x: scroll; 
+    overflow-wrap: anywhere;
 }
 select{
   width: 100%;
@@ -80,7 +82,7 @@ select{
   cursor: pointer;
   line-height: 1.1;
   appearance: none;
-  color: var(--toolbar-caption-color);
+  color: var(--text-color);
   margin: 0;
   cursor: inherit;
   line-height: inherit;
