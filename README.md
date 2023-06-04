@@ -1,5 +1,5 @@
 # Estuary-Rich-Text-Element
-A rich text input element for online forms
+A rich text input element I developed for online forms when something more than a simple HTML textarea is called for. Ideal for comment pages.
 Estuary RTE (Rich Text Element) is an input component to be used as part of a HTML form.  It is written mostly in vanilla Javascript but I have used JQuery when benificial.
 
 TO INSTALL:
