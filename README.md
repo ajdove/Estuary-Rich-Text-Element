@@ -40,9 +40,15 @@ Javascript file:
 
 TO PROCESS THE POSTED INPUT: 
 The field containg the content that is posted is the hdden field with name and id - "estrte_content". The data is posted as raw HTML so it is responsibility of the processing script to sanitize the data
-    to prevent malicious intent. 
+    to prevent malicious intent. Also it is advisable to remove class names and attributes that are required for the user to enter in data, but could cause problems on the viewers page if left in.
 for example if using PHP in the processing script: - 
-$content = htmlspecialchars($_POST['estrte_content']);
+$conmment = htmlspecialchars($_POST['estrte_content']);
+  $comment = str_ireplace('name=&quot;estrte_input_field&quot;','',$comment);
+  $comment = str_ireplace('id=&quot;estrte_input_field&quot;','',$comment);
+  $comment = str_ireplace('id=&quot;estrte_content_wrapper&quot;','',$comment);
+  $comment = str_ireplace('name=&quot;estrte_content_wrapper&quot;','',$comment);
+  $comment = str_ireplace('contenteditable=&quot;true&quot;','',$comment);
+
             if using node.js express in the processing script: - 
 var contentRaw = req.body.estrte_content;
   var map = {
@@ -52,7 +58,12 @@ var contentRaw = req.body.estrte_content;
     '"': '&quot;',
     "'": '&#039;'
   };
-  content = contentRaw(/[&<>"']/g, function(m) { return map[m]; });
+comment = contentRaw.replace(/[&<>"']/g, function(m) { return map[m]; });
+comment = comment.replace(/name=&quot;estrte_input_field&quot;/g, '');  
+comment = comment.replace(/id=&quot;estrte_input_field&quot;/g, '');  
+comment = comment.replace(/id=&quot;estrte_content_wrapper&quot;/g, '');  
+comment = comment.replace(/name=&quot;estrte_content_wrapper&quot;/g, '');
+comment = comment.replace(/contenteditable=&quot;true&quot;/g, '');
 
  
 
