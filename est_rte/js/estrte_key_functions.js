@@ -14,7 +14,7 @@ if(estrte_fragments_log.length > 0){
  	document.getElementById("estrte_undo").style.display = "inline-block";
  	document.getElementById("estrte_undo").innerHTML = "Undo";
 	newInputText = document.getElementById("estrte_content_wrapper").innerHTML;
-	document.getElementById("estrte_content").value = newInputText;
+	document.getElementById("estrte_content").value = estrte_sanitise_input_content(newInputText);
 
 	return;
 	}else{

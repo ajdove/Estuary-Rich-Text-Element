@@ -36,7 +36,7 @@
  	document.getElementById("estrte_undo").style.display = "inline-block";
  	document.getElementById("estrte_undo").innerHTML = "Undo Text";
 	newInputText = document.getElementById("estrte_content_wrapper").innerHTML; 
-	document.getElementById("estrte_content").value = newInputText;
+	document.getElementById("estrte_content").value = estrte_sanitise_input_content(newInputText);
 	return;	
       }
 
@@ -87,7 +87,7 @@ document.getElementById("estrte_input_field").contentEditable = true;
         	inserted_divs[i].contentEditable = true;
         }
 	newInputText = document.getElementById("estrte_content_wrapper").innerHTML;
-           document.getElementById("estrte_content").value = newInputText;
+           document.getElementById("estrte_content").value = estrte_sanitise_input_content(newInputText);
       	}
       function setEditableAndFocus(unix){
 	if(estrte_fragments_log.length > 0){
@@ -133,6 +133,25 @@ document.getElementById(unix).contentEditable = true;
         }
         doc.focus();
       }
+      
+function estrte_sanitise_input_content(inputHtmlRaw){
+  var map = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#039;'
+  };
+inputHtml = inputHtmlRaw.replace(/[&<>"']/g, function(m) { return map[m]; });
+inputHtml = inputHtml.replace(/name=&quot;estrte_input_field&quot;/g, '');  
+inputHtml = inputHtml.replace(/id=&quot;estrte_input_field&quot;/g, '');  
+inputHtml = inputHtml.replace(/id=&quot;estrte_content_wrapper&quot;/g, '');  
+inputHtml = inputHtml.replace(/name=&quot;estrte_content_wrapper&quot;/g, '');
+inputHtml = inputHtml.replace(/contenteditable=&quot;true&quot;/g, '');
+inputHtml = inputHtml.replace(/contenteditable=&quot;false&quot;/g, '');
+  return inputHtml;
+}
+      
 var toHTML = true;
 var estrte_fragments_log = [];
 var estrte_undo_log = [];
@@ -260,14 +279,14 @@ setTimeout(setEditableAndFocus(unix), 200);
 			document.getElementById("estrte_fontSizeSelect").value = "";
 	newInputText = document.getElementById("estrte_content_wrapper").innerHTML;
 	document.getElementById("estrte_content_wrapper").innerHTML = newInputText;
-           document.getElementById("estrte_content").value = document.getElementById("estrte_content_wrapper").innerHTML; 
+           document.getElementById("estrte_content").value = estrte_sanitise_input_content(document.getElementById("estrte_content_wrapper").innerHTML) 
 new_log = {"pre_edit": origInputText, "post_edit": newInputText, "type_of_edit": "Edit"}; 
 	estrte_fragments_log.unshift(new_log);
  	document.getElementById("estrte_undo").style.display = "inline-block";
  	document.getElementById("estrte_undo").innerHTML = "Undo Edit";
 	var pre_edit_value = estrte_fragments_log[0].pre_edit;
 	var post_edit_value = estrte_fragments_log[0].post_edit;
-	}
+	}  ;
 	
 	        if (window.getSelection){
 	            range = window.getSelection().removeAllRanges();   	
@@ -480,7 +499,7 @@ setTimeout(setEditableAndFocus(initialFocus), 200);
 		newInputText = document.getElementById("estrte_content_wrapper").innerHTML.replace(toReplace, replaceWith);
 		}
 	document.getElementById("estrte_content_wrapper").innerHTML = newInputText;
-           document.getElementById("estrte_content").value = newInputText; 
+           document.getElementById("estrte_content").value = estrte_sanitise_input_content(newInputText); 
 new_log = {"pre_edit": origInputText, "post_edit": newInputText, "type_of_edit": "Edit"}; 
 	estrte_fragments_log.unshift(new_log);
  	document.getElementById("estrte_undo").style.display = "inline-block";
@@ -663,7 +682,7 @@ estrte_color_editing = estrte_to_focus;
 	 document.getElementById(unix).innerHTML = newSegmentToEdit;
 	newInputText = document.getElementById("estrte_content_wrapper").innerHTML; 
 	document.getElementById("estrte_content_wrapper").innerHTML = newInputText;
-           document.getElementById("estrte_content").value = newInputText; 
+           document.getElementById("estrte_content").value = estrte_sanitise_input_content(newInputText); 
 new_log = {"pre_edit": origInputText, "post_edit": newInputText, "type_of_edit": "Edit"}; 
 	estrte_fragments_log.unshift(new_log);
  	document.getElementById("estrte_undo").style.display = "inline-block";
@@ -691,7 +710,7 @@ new_log = {"pre_edit": origInputText, "post_edit": newInputText, "type_of_edit":
     var newEditedDivColor = newDivColor.replace(regExp, newColor);  	
     var newNewInputText = newInputText.replace(newDivColor, newEditedDivColor); 
            document.getElementById("estrte_content_wrapper").innerHTML = newInputText;
-           document.getElementById("estrte_content").value = document.getElementById("estrte_content_wrapper").innerHTML;
+           document.getElementById("estrte_content").value = estrte_sanitise_input_content(document.getElementById("estrte_content_wrapper").innerHTML)
 	estrte_fragments_log[0].post_edit = newEditedDivColor;
 }  
 }
@@ -799,7 +818,7 @@ setTimeout(setEditableAndFocus(unix), 200);
 			document.getElementById("estrte_fontSizeSelect").value = "";
 	newInputText = document.getElementById("estrte_content_wrapper").innerHTML; 
 	document.getElementById("estrte_content_wrapper").innerHTML = newInputText;
-           document.getElementById("estrte_content").value = newInputText; 
+           document.getElementById("estrte_content").value = estrte_sanitise_input_content(newInputText); 
 new_log = {"pre_edit": origInputText, "post_edit": newInputText, "type_of_edit": "Edit"}; 
 	estrte_fragments_log.unshift(new_log);
  	document.getElementById("estrte_undo").style.display = "inline-block";
@@ -826,7 +845,7 @@ function estrte_undo(){
 	var editFrom = estrte_fragments_log[0].post_edit;
 	var editTo = estrte_fragments_log[0].pre_edit;
            document.getElementById("estrte_content_wrapper").innerHTML = editTo;
-           document.getElementById("estrte_content").value = document.getElementById("estrte_content_wrapper").innerHTML;
+           document.getElementById("estrte_content").value = estrte_sanitise_input_content(document.getElementById("estrte_content_wrapper").innerHTML)
  estrte_fragments_log.shift();
  if(estrte_fragments_log.length == 0){
  	document.getElementById("estrte_undo").style.display = "none";
@@ -851,7 +870,7 @@ function estrte_redo(){
 	 editTo = estrte_undo_log[0].post_edit;
 	 editFrom = estrte_undo_log[0].pre_edit;
            document.getElementById("estrte_content_wrapper").innerHTML = editFrom;
-           document.getElementById("estrte_content").value = document.getElementById("estrte_content_wrapper").innerHTML; 
+           document.getElementById("estrte_content").value = estrte_sanitise_input_content(document.getElementById("estrte_content_wrapper").innerHTML) 
  estrte_undo_log.shift();
  if(estrte_undo_log.length == 0){
  	document.getElementById("estrte_redo").style.display = "none";
@@ -1090,7 +1109,7 @@ setTimeout(setEditableAndFocus(unix + 11), 200);
 			document.getElementById("estrte_fontSizeSelect").value = "";
 	newInputText = document.getElementById("estrte_content_wrapper").innerHTML; 
 	document.getElementById("estrte_content_wrapper").innerHTML = newInputText;
-           document.getElementById("estrte_content").value = newInputText; 
+           document.getElementById("estrte_content").value = estrte_sanitise_input_content(newInputText);
 new_log = {"pre_edit": origInputText, "post_edit": newInputText, "type_of_edit": "Edit"}; 
 	estrte_fragments_log.unshift(new_log);
  	document.getElementById("estrte_undo").style.display = "inline-block";
@@ -1260,7 +1279,7 @@ setTimeout(setEditableAndFocus(unix + 11), 200);
 			document.getElementById("estrte_fontSizeSelect").value = "";
 	newInputText = document.getElementById("estrte_content_wrapper").innerHTML; 
 	document.getElementById("estrte_content_wrapper").innerHTML = newInputText;
-           document.getElementById("estrte_content").value = newInputText; 
+           document.getElementById("estrte_content").value = estrte_sanitise_input_content(newInputText);
 new_log = {"pre_edit": origInputText, "post_edit": newInputText, "type_of_edit": "Edit"}; 
 	estrte_fragments_log.unshift(new_log);
  	document.getElementById("estrte_undo").style.display = "inline-block";
@@ -1349,7 +1368,7 @@ function estrte_show_select_link_div(){
  	var newColor = "rgb(" + newRedValue + ", " + newGreenValue + ", " + newBlueValue + ")";
 	document.getElementById("estrte_color_monitor").style.backgroundColor = newColor;
  //	document.getElementById("estrte_color_monitor").style.backgroundColor = document.getElementById("estrte_color_monitor").style.backgroundColor;
-           document.getElementById("estrte_content").value = document.getElementById("estrte_input_field").innerHTML;
+           document.getElementById("estrte_content").value = estrte_sanitise_input_content(document.getElementById("estrte_content_wrapper").innerHTML);
 //     estrte_setColor();
      if(estrte_action == "set_background"){
   document.getElementById("estrte_input_field").style.backgroundColor = newColor;
@@ -1368,7 +1387,7 @@ function estrte_show_select_link_div(){
  	var blue = document.getElementById("blueComp").value;
  	var shade = document.getElementById("shadeComp").value;
  	var preColor = document.getElementById("estrte_input_field").style.backgroundColor;
-           document.getElementById("estrte_content").value = document.getElementById("estrte_content_wrapper").innerHTML; 
+           document.getElementById("estrte_content").value = estrte_sanitise_input_content(document.getElementById("estrte_content_wrapper").innerHTML) 
  	var newColor = "rgb(" + red + ", " + green + ", " + blue + ")";
  	document.getElementById("tempRed").value = red;
  	document.getElementById("tempGreen").value = green;

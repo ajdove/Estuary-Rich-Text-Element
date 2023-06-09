@@ -26,7 +26,7 @@ estrte_select_colour_div_html += '" step=1 class="slider" name="greenComp" id="g
 estrte_select_colour_div_html += '<label for="blueComp" class="estrte_colorLabel" contentEditable = false>Blue</label><input type="range" class="estrte_toolbar_slider" min="0" max="255" value="'
 estrte_select_colour_div_html += estrte_textColorArray[2];
 estrte_select_colour_div_html += '" step=1 class="slider" name="blueComp" id="blueComp" inputmode="none" oninput="estrte_setColor(\'blue\')">';
-estrte_select_colour_div_html += '<label for="shadeComp" class="estrte_colorLabel"contentEditable = false>Shade</label><input type="range" class="estrte_toolbar_slider" min="0" max="100" value="50" step=1 class="slider" name="shadeComp" id="shadeComp" oninput="estrte_setColor(\'shade\')">';
+estrte_select_colour_div_html += '<label for="shadeComp" class="estrte_colorLabel"contentEditable = false>Shade</label><input type="range" class="estrte_toolbar_slider" min="0" max="100" value="50" step=1 class="slider" name="shadeComp" id="shadeComp" inputmode="none" oninput="estrte_setColor(\'shade\')">';
 //estrte_select_colour_div_html += '<label for="hueComp">Hue</label><input type="range" class="estrte_toolbar_slider" min="0" max="319" value="100" step=1 class="slider" name="hueComp" id="hueComp" oninput="estrte_setHue()">';
 estrte_select_colour_div_html += '<input type="hidden" name="tempRed" id="tempRed" value="u" /><input type="hidden" name="tempGreen" id="tempGreen" value="u" /><input type="hidden" name="tempBlue" id="tempBlue" value="u" />';
 estrte_select_colour_div_html += '</div>';
@@ -1767,7 +1767,7 @@ for (i = 0; i < estrte_fonts.length; i++) {
 
 for (i = 0; i < estrte_emoji_categories.length; i++) {
       var category = estrte_emoji_categories[i];
-      document.getElementById("estrte_select_estrte_emojis_div").innerHTML += '<div class="estrte_emojis_category" id="emojis'+ category + '" unselectable="on"><label onclick="show_category_emojis(\'' + category + '\')">' + category + '&nbsp;&#x25bc;</label><div class="estrte_emojis_category_show" id="emojis_show'+ category + '"></div></div>';
+      document.getElementById("estrte_select_estrte_emojis_div").innerHTML += '<div class="estrte_emojis_category" id="emojis'+ category + '" inputmode="none" unselectable="on"><label onclick="show_category_emojis(\'' + category + '\')">' + category + '&nbsp;&#x25bc;</label><div class="estrte_emojis_category_show" id="emojis_show'+ category + '"></div></div>';
       }
 estrte_emojis.forEach((emoji) => {
 	var category = emoji.category;
