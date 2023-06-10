@@ -399,7 +399,8 @@ padding: var(--input-padding);
 	
 }
 .estrte_emojis_category{
-	display: block;
+	display: inline-block;
+	color: var(--toolbar-caption-color);
 }
 .estrte_emojis_category label{
 	color: var(--label-text-color);
