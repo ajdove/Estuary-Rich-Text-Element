@@ -1767,7 +1767,7 @@ for (i = 0; i < estrte_fonts.length; i++) {
 
 for (i = 0; i < estrte_emoji_categories.length; i++) {
       var category = estrte_emoji_categories[i];
-      document.getElementById("estrte_select_estrte_emojis_div").innerHTML += '<div class="estrte_emojis_category" id="emojis'+ category + '" inputmode="none" unselectable="on"><label onclick="show_category_emojis(\'' + category + '\')">' + category + '&nbsp;</label><div class="estrte_emojis_category_show" id="emojis_show'+ category + '"></div></div>';
+      document.getElementById("estrte_select_estrte_emojis_div").innerHTML += '<div class="estrte_emojis_category" id="emojis'+ category + '" inputmode="none" unselectable="on"><label onclick="show_category_emojis(\'' + category + '\')" onmouseover="show_category_emojis(\'' + category + '\')" touchenter="show_category_emojis(\'' + category + '\')">' + category + '&nbsp;</label><div class="estrte_emojis_category_show" id="emojis_show'+ category + '"></div></div>';
       }
 estrte_emojis.forEach((emoji) => {
 	var category = emoji.category;
