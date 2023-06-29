@@ -1329,8 +1329,9 @@ for (i = 0; i < estrte_lower_rgb_colors.length; i++) {
 function estrte_show_select_estrte_emojis_div(){
     estrte_color_editing = false;
 	    $("#estrte_select_estrte_emojis_div").toggle(estrte_toggle_speed);
-	    $("#estrte_select_emojis_label").off("touchenter");
-	    $("#estrte_select_emojis_label").off("onmouseover");
+	//    $("#estrte_select_emojis_label").off("touchenter");
+	//    $("#estrte_select_emojis_label").off("onmouseover");
+	    $("#estrte_select_emojis_label").off();
 }
 function estrte_show_select_special_characters_div(){
     estrte_color_editing = false;

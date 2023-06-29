@@ -17,16 +17,16 @@ let estrte_select_colour_div_html = '<div class="estrte_color_pallette" id="estr
 estrte_select_colour_div_html += '<div class="estrte_colorRowCont"><div id="estrte_setColorRow"></div>';
 estrte_select_colour_div_html += '<div class="estrte_LowerSetColorRow" id="estrte_lowerSetColorRow"></div>';
 estrte_select_colour_div_html += '</div>';
-estrte_select_colour_div_html += '<div class="estrte_slidecontainer" contentEditable = false><label for="redComp" class="estrte_colorLabel" contentEditable = false>Red</label><input type="range" class="estrte_toolbar_slider" min="0" max="255" value="';
+estrte_select_colour_div_html += '<div class="estrte_slidecontainer" contentEditable = false><label for="redComp" class="estrte_colorLabel" inputmode="none" contentEditable = false>Red</label><input type="range" class="estrte_toolbar_slider" min="0" max="255" value="';
 estrte_select_colour_div_html += estrte_textColorArray[0];
 estrte_select_colour_div_html += '" step=1 class="slider" name="redComp" id="redComp" inputmode="none" oninput="estrte_setColor(\'red\')">';
-estrte_select_colour_div_html += '<label for="greenComp" class="estrte_colorLabel" contentEditable = false>Green</label><input type="range" class="estrte_toolbar_slider" min="0" max="255" value="'
+estrte_select_colour_div_html += '<label for="greenComp" class="estrte_colorLabel" inputmode="none" contentEditable = false>Green</label><input type="range" class="estrte_toolbar_slider" min="0" max="255" value="'
 estrte_select_colour_div_html += estrte_textColorArray[1];
 estrte_select_colour_div_html += '" step=1 class="slider" name="greenComp" id="greenComp" inputmode="none" oninput="estrte_setColor(\'green\')">';
-estrte_select_colour_div_html += '<label for="blueComp" class="estrte_colorLabel" contentEditable = false>Blue</label><input type="range" class="estrte_toolbar_slider" min="0" max="255" value="'
+estrte_select_colour_div_html += '<label for="blueComp" class="estrte_colorLabel" inputmode="none" contentEditable = false>Blue</label><input type="range" class="estrte_toolbar_slider" min="0" max="255" value="'
 estrte_select_colour_div_html += estrte_textColorArray[2];
 estrte_select_colour_div_html += '" step=1 class="slider" name="blueComp" id="blueComp" inputmode="none" oninput="estrte_setColor(\'blue\')">';
-estrte_select_colour_div_html += '<label for="shadeComp" class="estrte_colorLabel"contentEditable = false>Shade</label><input type="range" class="estrte_toolbar_slider" min="0" max="100" value="50" step=1 class="slider" name="shadeComp" id="shadeComp" inputmode="none" oninput="estrte_setColor(\'shade\')">';
+estrte_select_colour_div_html += '<label for="shadeComp" class="estrte_colorLabel" inputmode="none" contentEditable = false>Shade</label><input type="range" class="estrte_toolbar_slider" min="0" max="100" value="50" step=1 class="slider" name="shadeComp" id="shadeComp" inputmode="none" oninput="estrte_setColor(\'shade\')">';
 //estrte_select_colour_div_html += '<label for="hueComp">Hue</label><input type="range" class="estrte_toolbar_slider" min="0" max="319" value="100" step=1 class="slider" name="hueComp" id="hueComp" oninput="estrte_setHue()">';
 estrte_select_colour_div_html += '<input type="hidden" name="tempRed" id="tempRed" value="u" /><input type="hidden" name="tempGreen" id="tempGreen" value="u" /><input type="hidden" name="tempBlue" id="tempBlue" value="u" />';
 estrte_select_colour_div_html += '</div>';
