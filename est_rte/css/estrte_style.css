@@ -210,6 +210,9 @@ padding: 2px 8px 2px 8px;
 .estrte_temp_holder{
 	display: none;
 }
+#estrte_select_special_characters_label strong{
+font-size:128%;
+}
 .estrte_small_unit_input{
 	display: inline-block;
 	color: var(--toolbar-caption-color);
