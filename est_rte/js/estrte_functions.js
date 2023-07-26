@@ -2078,8 +2078,6 @@ new_log = {"pre_edit": origInputText, "post_edit": newInputText, "type_of_edit":
 			}
 			
 		let number_of_edits = estrte_fragments_log.length;
-			
-		existingHTML = document.getElementById("estrte_content_wrapper").innerHTML;
  }
 function estrte_format(styleToAdd){
     estrte_color_editing = false;
