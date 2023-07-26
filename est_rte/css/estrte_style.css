@@ -605,6 +605,11 @@ background-image: linear-gradient(to right, #797979, #d0d0d0);
 	margin-bottom: var(--mobile-form-row-margin-bottom);
 	
 }
+#estrte_select_features_div{
+    border: 2px solid #c9c9c9;
+    max-height: 180px;
+    overflow-y: overlay;
+}
 #estrte_input_cont{
     width: 100%;
     min-height: 262px;
@@ -613,6 +618,19 @@ background-image: linear-gradient(to right, #797979, #d0d0d0);
 .estrte_unit_caption{
     margin:	3px 0px 3px 3px;
 }
+.table_spec_form{
+	margin-top: 0;
+}
+#table_spec_heading{
+	font-size: 28px;
+	margin-bottom: 0;
+}
+#estrte_color_pallette{
+padding: 1px;
+}.estrte_setSetColorLabel {
+    width: 24px;
+    height: 24px;
+	}
 .table_spec_row{
 	display: block;
 	margin-bottom: var(--mobile-form-row-margin-bottom);
