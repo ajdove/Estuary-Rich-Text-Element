@@ -1,4 +1,4 @@
-Estuary RTE (Rich Text Element) is an input component to be used as part of a HTML form.  It is written mostly in vanilla Javascript but I have used JQuery when benificial.
+Estuary RTE (Rich Text Element) is an input component to be used as part of a HTML form.  It is written completely in vanilla Javascript.
 
 TO INSTALL:
 Upload est_rte folder to root folder of project.
