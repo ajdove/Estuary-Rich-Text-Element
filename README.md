@@ -18,7 +18,7 @@ iii)  At the bottom of the <body> element include:
 -----------------------------------------------------------------------------------------------------------
 
 
-When using a framework you may need to make some appropriate adjustments:
+When using a framework you may need to make some appropriate adjustments. That will depend on the syntax and structure of the framework you are using. It is important that the rich text element is loaded on the page before estrte_functions.js script is run.
 for example:
     when using node.js with express framework and pug as formatting engine - to enable the application to read the estrte files, you need to add the following lines of code to the index 
 Javascript file: 
