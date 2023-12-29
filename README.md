@@ -32,7 +32,8 @@ Javascript file:
       "background: #ffffff url('/select_arrow.png') 97% 5px no-repeat".
       Other similar edits maybe required depending on the content.
 
-   When using Laravel with blade templating - upload est_rte folder to the public directory. Replace  <script type="text/javascript" src="est_rte/js/estrte_functions.js"></script> with <script type="text/javascript" src="{{ asset('/est_rte/js/estrte_functions.js')}}"></script>. Replace <link rel="stylesheet" href="est_rte/css/estrte_style.css"> with <link rel="stylesheet" href="{{ asset('/est_rte/css/estrte_style.css') }}" />. If using Blade templating - add !! html_entity_decode to the display for the HTML to be parsed correctly. eg <div class="entry_info_desc">{!! html_entity_decode($pic['img_desc']) !!}</div>.
+   When using Laravel with blade templating - upload est_rte folder to the public directory. Rename the file 'estrte_form.html' to 'estrte_form.blade.php' and save it in the resources/views' directory. At the place you need to include the rich-text-element - add
+@include('estrte_form'). Replace  <script type="text/javascript" src="est_rte/js/estrte_functions.js"></script> with <script type="text/javascript" src="{{ asset('/est_rte/js/estrte_functions.js')}}"></script>. Replace <link rel="stylesheet" href="est_rte/css/estrte_style.css"> with <link rel="stylesheet" href="{{ asset('/est_rte/css/estrte_style.css') }}" />. If using Blade templating - add !! html_entity_decode to the display for the HTML to be parsed correctly. eg <div class="entry_info_desc">{!! html_entity_decode($pic['img_desc']) !!}</div>.
    
 
 -----------------------------------------------------------------------------------------------------------
