@@ -3,7 +3,7 @@ Estuary RTE (Rich Text Element) is an input component to be used as part of a HT
 TO INSTALL:
 Upload est_rte folder to root folder of project.
 On the page with the form which will contain the rich text editor:
-i)     In the &lthead$gt&lt/head&gt section include:
+i)     In the head element include:
             <link rel="stylesheet" href="est_rte/css/estrte_style.css">
         It is advisable to include the following in the <head> section in order to compensate for older browsers -
             <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -11,7 +11,7 @@ i)     In the &lthead$gt&lt/head&gt section include:
 ii)    At the place where you wish to place the rich text editor input control:
              include - 'est_rte/estrte_form.html'
                             
-iii)  At the bottom of the <body> element include:
+iii)  At the bottom of the body element include:
       <script type="text/javascript" src="est_rte/js/estrte_functions.js"></script>
 
 
@@ -32,7 +32,8 @@ Javascript file:
       "background: #ffffff url('/select_arrow.png') 97% 5px no-repeat".
       Other similar edits maybe required depending on the content.
 
-
+   When using Laravel with blade templating - upload est_rte folder to the public directory. Replace  <script type="text/javascript" src="est_rte/js/estrte_functions.js"></script> with <script type="text/javascript" src="{{ asset('/est_rte/js/estrte_functions.js')}}"></script>. Replace <link rel="stylesheet" href="est_rte/css/estrte_style.css"> with <link rel="stylesheet" href="{{ asset('/est_rte/css/estrte_style.css') }}" />. If using Blade templating - add !! html_entity_decode to the display for the HTML to be parsed correctly. eg <div class="entry_info_desc">{!! html_entity_decode($pic['img_desc']) !!}</div>.
+   
 
 -----------------------------------------------------------------------------------------------------------
 
