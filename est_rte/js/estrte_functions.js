@@ -52,7 +52,7 @@ estrte_select_colour_div_html += '<label class="estrte_setTextColorLabel" id="es
 let link_html = '<div class="table_spec_form" id="link_spec_form"><div id="table_spec_heading">Add Link<span class="close_window" title="Close" onclick="close_select_features_div()">x</span></div>';
 link_html += '<div class="table_spec_row"><div class="table_spec_caption"><label>Text</label></div><div class="table_spec_input"><input type="text" name="link_text" id="link_text" /></div></div>';
 link_html += '<div class="table_spec_row"><div class="table_spec_caption"><label>URL</label></div><div class="table_spec_input"><input type="text" name="link_url" id="link_url" /></div></div>';
-link_html += '<div class="table_spec_row"><div class="table_spec_caption"></div><div class="table_spec_input"><label id="addTableButton" unselectable="on" onclick="add_link()">Add</label></div></div></div>';
+link_html += '<div class="table_spec_row"><div class="table_spec_caption"><div class="table_spec_input"><label id="addTableButton" unselectable="on" onclick="add_link()">Add</label></div></div></div></div>';
 
 
 /*  Styles included  */
@@ -1854,38 +1854,6 @@ function insertAfter(newNode, existingNode) {
         input.addEventListener("click", specCharAddToDiv);
         return input;
       }
-      function setFocus(){
-      	let newInputText;
-	if(estrte_fragments_log.length > 0){
-       let origInputText = estrte_fragments_log[0].post_edit;
-	}else{
-       let origInputText = document.getElementById("estrte_input_cont").innerHTML;
-	}
-document.getElementById("estrte_input_field").contentEditable = true;
-  let inserted_divs = document.getElementsByClassName("inserted_div");
-         let inserted_divsLength = inserted_divs.length;
-        for(let i = 0; i < inserted_divsLength; i++){
-        	inserted_divs[i].contentEditable = true;
-        }
-	newInputText = document.getElementById("estrte_content_wrapper").innerHTML;
-           document.getElementById("estrte_content").value = estrte_sanitise_input_content(newInputText);
-      	}
-      function setEditableAndFocus(unix){
-	if(estrte_fragments_log.length > 0){
-       let origInputText = estrte_fragments_log[0].post_edit;
-	}else{
-       let origInputText = document.getElementById("estrte_input_cont").innerHTML;
-	}
-document.getElementById(unix).contentEditable = true;
-      	setTimeout(function(){document.getElementById(unix).focus();}, 100);
-  let inserted_divs = document.getElementsByClassName("inserted_div");
-         let inserted_divsLength = inserted_divs.length;
-        document.getElementById("estrte_input_cont").addEventListener("click", setFocus);
-        document.getElementById(unix).addEventListener("mouseout", setFocus);
-        for(let  i = 0; i < inserted_divsLength; i++){
-       	inserted_divs[i].addEventListener("click", setFocus);
-        }
-      }
       function setDocMode(toSource) {
        let doc = document.getElementById("estrte_input_field");
         let content;
@@ -1952,6 +1920,40 @@ return;
 function estrte_set_current_style(styleToAdd, newValue){
 	document.getElementById("estrte_input_field").style.styleToAdd = newValue;
 }
+function setFocus(){
+	alert("Set Focus");
+      	let newInputText;
+	if(estrte_fragments_log.length > 0){
+       let origInputText = estrte_fragments_log[0].post_edit;
+	}else{
+       let origInputText = document.getElementById("estrte_input_cont").innerHTML;
+	}
+//document.getElementById("estrte_input_field").contentEditable = true;
+  let inserted_divs = document.getElementsByClassName("inserted_div");
+         let inserted_divsLength = inserted_divs.length;
+        for(let i = 0; i < inserted_divsLength; i++){
+        	inserted_divs[i].contentEditable = true;
+        }
+	newInputText = document.getElementById("estrte_content_wrapper").innerHTML;
+           document.getElementById("estrte_content").value = estrte_sanitise_input_content(newInputText);
+      	}
+      function setEditableAndFocus(unix){
+	if(estrte_fragments_log.length > 0){
+       let origInputText = estrte_fragments_log[0].post_edit;
+	}else{
+       let origInputText = document.getElementById("estrte_input_cont").innerHTML;
+	}
+document.getElementById(unix).contentEditable = true;
+      	setTimeout(function(){document.getElementById(unix).focus();}, 100);
+  let inserted_divs = document.getElementsByClassName("inserted_div");
+         let inserted_divsLength = inserted_divs.length;
+        document.getElementById("estrte_input_cont").addEventListener("click", setFocus);
+        document.getElementById(unix).addEventListener("mouseout", setFocus);
+        for(let  i = 0; i < inserted_divsLength; i++){
+       	inserted_divs[i].addEventListener("click", setFocus);
+        }
+      }
+      
 function estrte_add_style(styleToAdd, newValue){
     estrte_color_editing = false;
   let estrte_prevDelete = 'no';
@@ -2022,12 +2024,14 @@ document.getElementById("estrte_input_field").contentEditable = false;
          let inserted_divsLength = inserted_divs.length;
         for(let i = 0; i < inserted_divsLength; i++){
         	inserted_divs[i].contentEditable = false;
+        inserted_divs[i].addEventListener("click", function(){inserted_divs[i].contentEditable = true});
         }
            let el = document.createElement("div");
             el.innerHTML = '';
             el.id = unix;
             el.className = "inserted_div";
             el.style = styleToAdd + ":" + newValue + ";";
+            el.addEventListener("click", {stopPropagation: true});
             let docFrag = document.createDocumentFragment();
            let node = el;
              let lastNode = docFrag.appendChild(node);
@@ -2038,10 +2042,19 @@ document.getElementById("estrte_input_field").contentEditable = false;
               range.collapse(true);
               sel.removeAllRanges();
               sel.addRange(range);
+        document.getElementById("estrte_input_field").addEventListener("click", function(){document.getElementById("estrte_input_field").contentEditable = true});
 document.getElementById(unix).contentEditable = true;
-setTimeout(setEditableAndFocus(unix), 200);
+setTimeout(function(){document.getElementById(unix).focus();}, 200);
 
-            style_added = true;
+	if(estrte_fragments_log.length > 0){
+       let origInputText = estrte_fragments_log[0].post_edit;
+	}else{
+       let origInputText = document.getElementById("estrte_input_cont").innerHTML;
+	}
+//document.getElementById(unix).contentEditable = true;
+//       document.getElementById(unix).focus();
+
+         style_added = true;
           }
 			}else{ 
    let newNode = document.createElement('div');
@@ -2080,7 +2093,7 @@ new_log = {"pre_edit": origInputText, "post_edit": newInputText, "type_of_edit":
 		let number_of_edits = estrte_fragments_log.length;
  }
 function estrte_format(styleToAdd){
-    estrte_color_editing = false;
+  let estrte_color_editing = false;
   let existingHTML;
   let estrte_prevDelete = 'no';
   let selectedText;
@@ -2156,26 +2169,29 @@ let existingSegment = selectedTextString;
 			let existingFormat = 'style="' + styleToAdd +':' + newValue + ';"';
 				if(parentOuterHTML.indexOf(existingFormat) != -1){
 				}  
-			if(selectedText == ''){   
+			if(selectedText == ''){
 document.getElementById("estrte_input_field").contentEditable = false;
   let inserted_divs = document.getElementsByClassName("inserted_div");
          let inserted_divsLength = inserted_divs.length;
         for (let i = 0; i < inserted_divsLength; i++){
         	inserted_divs[i].contentEditable = false;
+        	inserted_divs[i].addEventListener("click", function(){inserted_divs[i].contentEditable = true});
         }
+document.getElementById("estrte_input_field").addEventListener("click", function(){document.getElementById("estrte_input_field").contentEditable = true});
         let already = false;
 			let sel = window.getSelection();
             	let initialFocus = unix;
           if (sel.getRangeAt && sel.rangeCount) {
             if(parentElementTagName.toLowerCase() != styleToAdd){  
           let thisResult = ancestor(document.getElementById(parentElementId), styleToAdd);
-        		if(thisResult == null){ 
+        		if(thisResult == null){
 				            range = sel.getRangeAt(0);
             range.deleteContents();
            let el = document.createElement(styleToAdd);
             el.innerHTML = '';
             el.id = unix;
             el.className = "inserted_div";
+            el.addEventListener("click", {stopPropagation: true});
             let docFrag = document.createDocumentFragment();
            let node = el;
              let lastNode = docFrag.appendChild(node);
@@ -2185,7 +2201,7 @@ document.getElementById("estrte_input_field").contentEditable = false;
               range.collapse(true);
               sel.removeAllRanges();
 document.getElementById("format" + styleToAdd).style.fontWeight = "bold";
-			}else{ 
+			}else{
 				let thisFirstElementChild = thisResult.firstElementChild;
 				let thisFirstElementChildTagName = thisResult.firstElementChild.tagName;
 				let thisFirstElementChildStyle = thisResult.firstElementChild.style.cssText;
@@ -2260,10 +2276,10 @@ document.getElementById("format" + styleToAdd).style.fontWeight = "normal";
               sel.addRange(range);
             style_added = true;
 document.getElementById(initialFocus).contentEditable = true;
-setTimeout(setEditableAndFocus(initialFocus), 200);
+setTimeout(function(){document.getElementById(initialFocus).focus();}, 200);
 		
 	
-	}else{  
+	}else{
 	if(parentElementTagName.toLowerCase() != styleToAdd.toLowerCase()){
    let newNode = document.createElement(styleToAdd);
                    newNode.setAttribute("class", "inserted_div");
@@ -2289,7 +2305,7 @@ setTimeout(setEditableAndFocus(initialFocus), 200);
 		}
 	}
 	newInputText = document.getElementById("estrte_content_wrapper").innerHTML;
-	document.getElementById("estrte_content_wrapper").innerHTML = newInputText;
+	//document.getElementById("estrte_content_wrapper").innerHTML = newInputText;
            document.getElementById("estrte_content").value = estrte_sanitise_input_content(newInputText); 
 new_log = {"pre_edit": origInputText, "post_edit": newInputText, "type_of_edit": "Edit"}; 
 	estrte_fragments_log.unshift(new_log);
@@ -2424,11 +2440,13 @@ document.getElementById("estrte_input_field").contentEditable = false;
          let inserted_divsLength = inserted_divs.length;
         for (let i = 0; i < inserted_divsLength; i++){
         	inserted_divs[i].contentEditable = false;
+        	inserted_divs[i].addEventListener("click", function(){inserted_divs[i].contentEditable = true});
         }
+document.getElementById("estrte_input_field").addEventListener("click", function(){document.getElementById("estrte_input_field").contentEditable = true});
 				if(estrte_color_editing){
 					console.log("estrte_color_editing " + estrte_color_editing);
 				document.getElementById(estrte_color_editing).style.color = newColor;
-				setTimeout(setEditableAndFocus(estrte_color_editing), 10);
+			//	setTimeout(document.getElementById(estrte_color_editing).focus(), 100);
 				estrte_to_focus = estrte_color_editing;
 				}else{
 			let sel = window.getSelection();
@@ -2440,6 +2458,7 @@ document.getElementById("estrte_input_field").contentEditable = false;
             el.id = unix;
             el.className = "inserted_div";
             el.style = "color:" + newColor + ";";
+            el.addEventListener("click", {stopPropagation: true});
             let docFrag = document.createDocumentFragment();
            let node = el;
              let lastNode = docFrag.appendChild(node);
@@ -2449,13 +2468,13 @@ document.getElementById("estrte_input_field").contentEditable = false;
               range.collapse(true);
               sel.removeAllRanges();
               sel.addRange(range);
-document.getElementById(unix).contentEditable = true;
             style_added = true;
           }
 estrte_to_focus = unix;
 				}
 console.log(unix + " estrte_to_focus " + estrte_to_focus);
-setTimeout(setEditableAndFocus(estrte_to_focus), 1);
+document.getElementById(estrte_to_focus).contentEditable = true;
+setTimeout(function(){document.getElementById(estrte_to_focus).focus();}, 200);
 estrte_color_editing = estrte_to_focus;
 			}else{
 				
@@ -2484,7 +2503,7 @@ estrte_color_editing = estrte_to_focus;
      newSegmentToEdit = newSegmentToEdit.replace(regExp, '');  
 	 document.getElementById(unix).innerHTML = newSegmentToEdit;
 	newInputText = document.getElementById("estrte_content_wrapper").innerHTML; 
-	document.getElementById("estrte_content_wrapper").innerHTML = newInputText;
+//	document.getElementById("estrte_content_wrapper").innerHTML = newInputText;
            document.getElementById("estrte_content").value = estrte_sanitise_input_content(newInputText); 
 new_log = {"pre_edit": origInputText, "post_edit": newInputText, "type_of_edit": "Edit"}; 
 	estrte_fragments_log.unshift(new_log);
@@ -2512,7 +2531,7 @@ new_log = {"pre_edit": origInputText, "post_edit": newInputText, "type_of_edit":
     let regExp = new RegExp(/rgb\((\d{1,3})\, (\d{1,3})\, (\d{1,3})\)/, 'g');
     let newEditedDivColor = newDivColor.replace(regExp, newColor);  	
     let newNewInputText = newInputText.replace(newDivColor, newEditedDivColor); 
-           document.getElementById("estrte_content_wrapper").innerHTML = newInputText;
+     //      document.getElementById("estrte_content_wrapper").innerHTML = newInputText;
            document.getElementById("estrte_content").value = estrte_sanitise_input_content(document.getElementById("estrte_content_wrapper").innerHTML)
 	estrte_fragments_log[0].post_edit = newEditedDivColor;
 }  
@@ -2596,7 +2615,9 @@ document.getElementById("estrte_input_field").contentEditable = false;
           let inserted_divsLength = inserted_divs.length;
         for (let i = 0; i < inserted_divsLength; i++){
         	inserted_divs[i].contentEditable = false;
-        }  
+            inserted_divs[i].addEventListener("click", function(){inserted_divs[i].contentEditable = true});
+        }
+    document.getElementById("estrte_input_field").addEventListener("click", function(){document.getElementById("estrte_input_field").contentEditable = true});
         
          
          inserted_elements = document.getElementsByClassName("inserted_div");
@@ -2611,6 +2632,7 @@ document.getElementById("estrte_input_field").contentEditable = false;
             el.id = unix;
             el.className = "inserted_div";
             el.innerHTML = '<span class="est_placeholder">-</span>';
+            el.addEventListener("click", {stopPropagation: true});
             docFrag = document.createDocumentFragment();
             let node = el;
              let lastNode = docFrag.appendChild(node);
@@ -2622,8 +2644,7 @@ document.getElementById("estrte_input_field").contentEditable = false;
 			}
 document.getElementById(unix).addEventListener("keydown", estrte_remove_placeholder, true);
 document.getElementById(unix).contentEditable = true;
-//document.getElementById(unix).focus();
-setTimeout(setEditableAndFocus(unix), 200);
+setTimeout(function(){document.getElementById(unix).focus();}, 200);
           }
           }else{
     let newNode = document.createElement('p');
@@ -2636,7 +2657,7 @@ setTimeout(setEditableAndFocus(unix), 200);
 			document.getElementById("estrte_fontsSelect").value = "";
 			document.getElementById("estrte_fontSizeSelect").value = "";
 	newInputText = document.getElementById("estrte_content_wrapper").innerHTML; 
-	document.getElementById("estrte_content_wrapper").innerHTML = newInputText;
+	//document.getElementById("estrte_content_wrapper").innerHTML = newInputText;
            document.getElementById("estrte_content").value = estrte_sanitise_input_content(newInputText); 
 new_log = {"pre_edit": origInputText, "post_edit": newInputText, "type_of_edit": "Edit"}; 
 	estrte_fragments_log.unshift(new_log);
@@ -2705,7 +2726,7 @@ estrte_fragments_log.unshift(new_log);
  	document.getElementById("estrte_undo").style.display = "inline-block";
  	document.getElementById("estrte_undo").innerHTML = "Undo";
 	}
-        document.getElementById("estrte_input_field").addEventListener("click", setFocus);
+    //    document.getElementById("estrte_input_field").addEventListener("click", setFocus);
 			let existingHTML = document.getElementById("estrte_content_wrapper").innerHTML;
 	        let tempAfterDelete = document.getElementById("estrte_content_wrapper").innerHTML;
            document.getElementById("estrte_content_wrapper").style.backgroundColor = document.getElementById("estrte_input_field").style.backgroundColor;
@@ -2760,12 +2781,19 @@ let unix = Math.round(+date / 1000);
 	}
 		table_html += '</tbody></table>';
 
+document.getElementById("estrte_input_field").contentEditable = false;
   let inserted_divs = document.getElementsByClassName("inserted_div");
+         let inserted_divsLength = inserted_divs.length;
+        for(let i = 0; i < inserted_divsLength; i++){
+        inserted_divs[i].contentEditable = false;
+        inserted_divs[i].addEventListener("click", function(){inserted_divs[i].contentEditable = true});
+        }
+    document.getElementById("estrte_input_field").addEventListener("click", function(){document.getElementById("estrte_input_field").contentEditable = true});
    let first_layer_inserted_elements = new Array();
-          let inserted_divsLength = inserted_divs.length;
           if(inserted_divsLength == 0){
           	if(document.getElementById("estrte_input_field").children.length > 0){
              insertAfterElement = document.getElementById("estrte_input_field").firstChild;
+          	}else{
           	}
           }else{
         for(let i = 0; i < inserted_divsLength; i++){
@@ -2794,24 +2822,24 @@ let unix = Math.round(+date / 1000);
           inserted_divsLength = inserted_divs.length;
          			 insertAfterElement = inserted_divs[inserted_divsLength - 1];
          			 let styledElement = inserted_divs[inserted_divsLength - 2];
-
             el = document.createElement("div");
-            el.id = unix + "b";
+            elId = unix.toString() + "b";
+            el.id = elId;
             el.className = "inserted_div";
             el.innerHTML = '<span class="est_placeholder">-</span>';
+            el.addEventListener("click", {stopPropagation: true});
             if(styledElement){
 			el.style = styledElement.style.cssText;
 	}
             node = el;
     insertAfter(node, insertAfterElement);
-document.getElementById(unix + "b").addEventListener("keyup", estrte_remove_placeholder, true);
-document.getElementById(unix + "b").contentEditable = true;
-setTimeout(setEditableAndFocus(unix + "b"), 200);
+document.getElementById(elId).contentEditable = true;
+document.getElementById(elId).addEventListener("keydown", estrte_remove_placeholder, true);
+setTimeout(function(){document.getElementById(elId).focus();}, 200);
 
 			document.getElementById("estrte_fontsSelect").value = "";
 			document.getElementById("estrte_fontSizeSelect").value = "";
-	newInputText = document.getElementById("estrte_content_wrapper").innerHTML; 
-	document.getElementById("estrte_content_wrapper").innerHTML = newInputText;
+	newInputText = document.getElementById("estrte_content_wrapper").innerHTML;
            document.getElementById("estrte_content").value = estrte_sanitise_input_content(newInputText);
 new_log = {"pre_edit": origInputText, "post_edit": newInputText, "type_of_edit": "Edit"}; 
 	estrte_fragments_log.unshift(new_log);
@@ -2842,11 +2870,15 @@ let unix = Math.round(+date / 1000);
 	let link_url = document.getElementById("link_url").value;
 let link_html = '<a href=' + link_url + '>' + link_text + '</a>';
     
-    
-    
+document.getElementById("estrte_input_field").contentEditable = false;
   let inserted_divs = document.getElementsByClassName("inserted_div");
-   let first_layer_inserted_elements = new Array();
          let inserted_divsLength = inserted_divs.length;
+        for(let i = 0; i < inserted_divsLength; i++){
+        inserted_divs[i].contentEditable = false;
+        inserted_divs[i].addEventListener("click", function(){inserted_divs[i].contentEditable = true});
+        }
+    document.getElementById("estrte_input_field").addEventListener("click", function(){document.getElementById("estrte_input_field").contentEditable = true});
+   let first_layer_inserted_elements = new Array();
           if(inserted_divsLength == 0){
           	if(document.getElementById("estrte_input_field").children.length > 0){
              insertAfterElement = document.getElementById("estrte_input_field").firstChild;
@@ -2876,23 +2908,24 @@ let link_html = '<a href=' + link_url + '>' + link_text + '</a>';
          			 styledElement = inserted_divs[inserted_divsLength - 2];
 
            el = document.createElement("div");
-            el.id = unix + "b";
+            elId = unix.toString() + "c";
+            el.id = elId;
             el.className = "inserted_div";
             el.innerHTML = '<span class="est_placeholder">-</span>';
+            el.addEventListener("click", {stopPropagation: true});
             if(styledElement){
 			el.style = styledElement.style.cssText;
 	}
             node = el;
     insertAfter(node, insertAfterElement);
-document.getElementById(unix + "b").addEventListener("keydown", estrte_remove_placeholder, true);
-document.getElementById(unix + "b").contentEditable = true;
-setTimeout(setEditableAndFocus(unix + "b"), 200); 
+document.getElementById(elId).contentEditable = true;
+document.getElementById(elId).addEventListener("keydown", estrte_remove_placeholder, true);
+setTimeout(function(){document.getElementById(elId).focus();}, 200);
 
 
 			document.getElementById("estrte_fontsSelect").value = "";
 			document.getElementById("estrte_fontSizeSelect").value = "";
 	newInputText = document.getElementById("estrte_content_wrapper").innerHTML; 
-	document.getElementById("estrte_content_wrapper").innerHTML = newInputText;
            document.getElementById("estrte_content").value = estrte_sanitise_input_content(newInputText);
 new_log = {"pre_edit": origInputText, "post_edit": newInputText, "type_of_edit": "Edit"}; 
 	estrte_fragments_log.unshift(new_log);
@@ -3173,7 +3206,6 @@ document.getElementById("estrte_select_features_div").style.display = "none";
   return node;
 }
 
-
 document.getElementById("estrte_input_field").contentEditable = "true";
 document.getElementById("estrte_input_field").focus();
 document.addEventListener("keyup", (function(event){
@@ -3209,7 +3241,7 @@ for (let i = 0; i < estrte_fonts.length; i++) {
   document.getElementById("estrte_fontsSelect").innerHTML += '<option value="' + estrte_fonts[i] + '">' + estrte_fonts[i] + "</option>";
 }
 
-document.getElementById("estrte_input_field").focus();
 document.getElementById("estrte_select_color_label").addEventListener("click", estrte_show_select_color_div, true);
 document.getElementById("estrte_select_special_characters_label").addEventListener("click", estrte_show_select_special_characters_div, true);
 document.getElementById("estrte_select_emojis_label").addEventListener("click", estrte_show_select_estrte_emojis_div, true);
+document.getElementById("estrte_input_field").focus();
