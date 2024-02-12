@@ -23,7 +23,7 @@
   --toolbar-border: none;
   --comment-input-border: 1px solid #464e54;
   --input-border: 1px solid #464e54;
-  --form-row-margin-bottom: 18px;
+  --form-row-margin-bottom: 10px;
   --mobile-form-row-margin-bottom: 8px;
   --table-datum-width: 80px;
   --table-datum-height: 28px;
@@ -39,7 +39,10 @@
   outline: 0px solid transparent;
 }
 p{
-  text-indent: 3ch;
+    text-indent: 3ch;
+    line-height: normal;
+    margin-top: 3px;
+    margin-bottom: 3px;
 	}
 #estrte_cont{
     width: 100%;
