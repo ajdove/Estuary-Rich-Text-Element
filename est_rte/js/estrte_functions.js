@@ -1891,7 +1891,8 @@ function estrte_sanitise_input_content(inputHtmlRaw){
     '"': '&quot;',
     "'": '&#039;'
   };
-let inputHtml = inputHtmlRaw.replace(/[&<>"']/g, function(m) { return map[m]; });
+let inputHtml = inputHtmlRaw.replace('id="estrte_input_field"', 'id="pref"');
+inputHtml = inputHtml.replace(/[&<>"']/g, function(m) { return map[m]; });
 inputHtml = inputHtml.replace(/name=&quot;estrte_input_field&quot;/g, '');  
 inputHtml = inputHtml.replace(/id=&quot;estrte_input_field&quot;/g, '');  
 inputHtml = inputHtml.replace(/id=&quot;estrte_content_wrapper&quot;/g, '');  
@@ -1920,39 +1921,6 @@ return;
 function estrte_set_current_style(styleToAdd, newValue){
 	document.getElementById("estrte_input_field").style.styleToAdd = newValue;
 }
-function setFocus(){
-	alert("Set Focus");
-      	let newInputText;
-	if(estrte_fragments_log.length > 0){
-       let origInputText = estrte_fragments_log[0].post_edit;
-	}else{
-       let origInputText = document.getElementById("estrte_input_cont").innerHTML;
-	}
-//document.getElementById("estrte_input_field").contentEditable = true;
-  let inserted_divs = document.getElementsByClassName("inserted_div");
-         let inserted_divsLength = inserted_divs.length;
-        for(let i = 0; i < inserted_divsLength; i++){
-        	inserted_divs[i].contentEditable = true;
-        }
-	newInputText = document.getElementById("estrte_content_wrapper").innerHTML;
-           document.getElementById("estrte_content").value = estrte_sanitise_input_content(newInputText);
-      	}
-      function setEditableAndFocus(unix){
-	if(estrte_fragments_log.length > 0){
-       let origInputText = estrte_fragments_log[0].post_edit;
-	}else{
-       let origInputText = document.getElementById("estrte_input_cont").innerHTML;
-	}
-document.getElementById(unix).contentEditable = true;
-      	setTimeout(function(){document.getElementById(unix).focus();}, 100);
-  let inserted_divs = document.getElementsByClassName("inserted_div");
-         let inserted_divsLength = inserted_divs.length;
-        document.getElementById("estrte_input_cont").addEventListener("click", setFocus);
-        document.getElementById(unix).addEventListener("mouseout", setFocus);
-        for(let  i = 0; i < inserted_divsLength; i++){
-       	inserted_divs[i].addEventListener("click", setFocus);
-        }
-      }
       
 function estrte_add_style(styleToAdd, newValue){
     estrte_color_editing = false;
@@ -2726,7 +2694,6 @@ estrte_fragments_log.unshift(new_log);
  	document.getElementById("estrte_undo").style.display = "inline-block";
  	document.getElementById("estrte_undo").innerHTML = "Undo";
 	}
-    //    document.getElementById("estrte_input_field").addEventListener("click", setFocus);
 			let existingHTML = document.getElementById("estrte_content_wrapper").innerHTML;
 	        let tempAfterDelete = document.getElementById("estrte_content_wrapper").innerHTML;
            document.getElementById("estrte_content_wrapper").style.backgroundColor = document.getElementById("estrte_input_field").style.backgroundColor;
@@ -2940,6 +2907,9 @@ function  estrte_show_select_color_div(){
 document.getElementById("estrte_select_features_div").style.display = "block";
 document.getElementById("estrte_select_features_div").innerHTML = estrte_select_colour_div_html;
         estrte_populate_colour_div('');
+        document.getElementById("estrte_input_field").addEventListener("keydown", function () {
+            close_select_features_div();
+        });
  }
 function estrte_populate_colour_div(holder){
     estrte_color_editing = false;
@@ -2983,6 +2953,9 @@ estrte_emojis.forEach((emoji) => {
 	}
 
       });
+        document.getElementById("estrte_input_field").addEventListener("keydown", function () {
+            close_select_features_div();
+        });
 }  
 function estrte_show_select_special_characters_div(){
     estrte_color_editing = false;
@@ -2991,6 +2964,9 @@ document.getElementById("estrte_select_features_div").style.display = "block";
     for (let i = 0; i < estrte_special_chars.length; i++) {
        document.getElementById("estrte_special_chars").appendChild(generateSpecialcharIcon(estrte_special_chars[i]));
 }
+        document.getElementById("estrte_input_field").addEventListener("keydown", function () {
+            close_select_features_div();
+        });
 }
 function estrte_show_table_spec_div(){
 document.getElementById("estrte_select_features_div").style.display = "block";
@@ -3164,6 +3140,7 @@ document.getElementById("estrte_select_features_div").style.display = "block";
  function close_select_features_div(){
 document.getElementById("estrte_select_features_div").innerHTML = '';
 document.getElementById("estrte_select_features_div").style.display = "none";
+document.getElementById("estrte_input_field").removeEventListener("keydown", close_select_features_div);
 }
  function ancestor(node, match){
   if(!node)
