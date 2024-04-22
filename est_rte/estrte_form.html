@@ -1,5 +1,5 @@
 <div id="estrte_cont">
-		<div id="estrte_toolbar" contenteditable="false" unselectable="on" inputmode="none">
+		<div id="estrte_toolbar" contenteditable="false"  unselectable="on" inputmode="none">
 		<div class="estrte_toolbar_unit" ><div class="estrte_unit_caption">Font</div><div class="estrte_unit_input_select">
 		<select class="estrte_fontsSelectInput" id="estrte_fontsSelect" onchange="estrte_add_style('font-family', this.value)">
 		<option value="" selected="selected" disabled="disabled">Select</option>
@@ -11,14 +11,14 @@
 		</select> 
 		</div></div>
 		<div class="estrte_toolbar_unit_cont"  unselectable="on" inputmode="none">
-	<div class="estrte_unit_input" ><label class="estrte_toolbar_label" id="formatstrong"  onclick="estrte_format('strong')">B</label></div>&nbsp;
-	<div class="estrte_unit_input" ><label class="estrte_toolbar_label" id="formatem"  onclick="estrte_format('em')"><em>I</em></label></div>&nbsp;
-	<div class="estrte_unit_input" ><label class="estrte_toolbar_label" id="formatu"  onclick="estrte_format('u')"><u>U</u></label></div>
+	<div class="estrte_unit_input" ><label class="estrte_toolbar_label" id="formatstrong"  onmousedown="estrte_format('strong')" ontouchstart="estrte_format('strong')">B</label></div>&nbsp;
+	<div class="estrte_unit_input" ><label class="estrte_toolbar_label" id="formatem"  onmousedown="estrte_format('em')" ontouchstart="estrte_format('em')"><em>I</em></label></div>&nbsp;
+	<div class="estrte_unit_input" ><label class="estrte_toolbar_label" id="formatu"  onmousedown="estrte_format('u')" ontouchstart="estrte_format('u')"><u>U</u></label></div>
 		</div>
 		<div class="estrte_toolbar_unit_cont" unselectable="on" inputmode="none">
-	<div class="estrte_unit_input" ><label class="estrte_toolbar_label" id="estrte_paragraph" title="Paragraph"  onclick="estrte_add_paragraph()">P</label></div>	
+	<div class="estrte_unit_input" ><label class="estrte_toolbar_label" id="estrte_paragraph" title="Paragraph"  onmousedown="estrte_add_paragraph()" ontouchstart="estrte_add_paragraph()">P</label></div>	
 		</div>
-		<div class="estrte_color_monitor" id="estrte_color_monitor"  onclick="estrte_setContentColor(this.id)"></div>
+		<div class="estrte_color_monitor" id="estrte_color_monitor"  onmousedown="estrte_setContentColor(this.id)" ontouchstart="estrte_setContentColor(this.id)"></div>
 <div class="estrte_toolbar_unit_cont"  unselectable="on" inputmode="none">
 		<div class="estrte_toolbar_unit" id="estrte_show_color_select" inputmode="none"  unselectable="on"><div class="estrte_unit_caption"><label class="estrte_select_color_label" id="estrte_select_color_label" title="Show Colours" unselectable="on" inputmode="none"><img src="est_rte/images/color_select.png" alt="" /></label></div>
 		</div></div>
@@ -27,12 +27,12 @@
 		<div class="estrte_unit_caption"><label class="estrte_select_color_label" id="estrte_select_emojis_label" title="Emoticons" unselectable="on" inputmode="none" readonly="readonly">😂</label></div></div>
 		<div class="estrte_toolbar_unit" id="estrte_show_special_chars_select"  inputmode="none" unselectable="on"><div class="estrte_unit_caption"><label class="estrte_select_color_label" id="estrte_select_special_characters_label" title="Special Characters" unselectable="on"  inputmode="none"><strong>Ω</strong></label></div></div>
     <div class="estrte_unit_input" id="editMode" inputmode="none" unselectable="on" >
-        <label onclick="setDocMode('toSource');" >Show&nbsp;HTML</label>
+        <label onmousedown="setDocMode('toSource');" ontouchstart="setDocMode('toSource');" >Show&nbsp;HTML</label>
       </div>
-		<div class="estrte_small_unit_input" id="estrte_undo"  onclick="estrte_undo()">Undo</div>
-		<div class="estrte_small_unit_input" id="estrte_redo"  onclick="estrte_redo()">Redo</div>
-		<div class="estrte_small_unit_input" id="estrte_table"  onclick="estrte_show_table_spec_div()">Table</div>
-		<div class="estrte_small_unit_input" id="estrte_link"  onclick="estrte_show_select_link_div()">Link</div>
+		<div class="estrte_small_unit_input" id="estrte_undo"  onmousedown="estrte_undo()" ontouchstart="estrte_undo()">Undo</div>
+		<div class="estrte_small_unit_input" id="estrte_redo"  onmousedown="estrte_redo()" ontouchstart="estrte_redo()">Redo</div>
+		<div class="estrte_small_unit_input" id="estrte_table"  onmousedown="estrte_show_table_spec_div()" ontouchstart="estrte_show_table_spec_div()">Table</div>
+		<div class="estrte_small_unit_input" id="estrte_link"  onmousedown="estrte_show_select_link_div()" ontouchstart="estrte_show_select_link_div()">Link</div>
 		<input type="hidden" name="table_html_hidden" id="table_html_hidden"/>
 		
 		
@@ -40,7 +40,7 @@
 
 		</div></div>
 		<div class="estrte_input_cont" name="estrte_input_cont" id="estrte_input_cont" contenteditable="true">
-		<div name="estrte_content_wrapper" id="estrte_content_wrapper"><div name="estrte_input_field" id="estrte_input_field" contentEditable = "true"></div></div>
+		<div name="estrte_content_wrapper" id="estrte_content_wrapper"><div name="estrte_input_field" id="estrte_input_field" contentEditable = "true" autofocus></div></div>
 		<div id="show_temp_logs"></div>
 		<input type="hidden" name="estrte_content" id="estrte_content" onchange="estre_getSelectedText()" />
 		<input type="hidden" name="deletedCounter" id="deletedCounter" value="0"/>

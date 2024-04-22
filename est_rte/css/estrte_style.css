@@ -23,8 +23,8 @@
   --toolbar-border: none;
   --comment-input-border: 1px solid #464e54;
   --input-border: 1px solid #464e54;
-  --form-row-margin-bottom: 10px;
-  --mobile-form-row-margin-bottom: 8px;
+  --form-row-margin-bottom: 6px;
+  --mobile-form-row-margin-bottom: 2px;
   --table-datum-width: 80px;
   --table-datum-height: 28px;
   --mobile-table-datum-width: 62px;
@@ -38,29 +38,33 @@
 [contenteditable] {
   outline: 0px solid transparent;
 }
+input[type="button"]{
+   border: none;
+   background-color: #ffffff;
+}
 p{
-    text-indent: 3ch;
+  text-indent: 3ch;
     line-height: normal;
     margin-top: 3px;
     margin-bottom: 3px;
 	}
-#estrte_cont{
+.estrte_cont{
     width: 100%;
     background-color: var(--background-theme-color);
     font-family: var(--master-font-family); 
     border: none;
-    padding: 1px;
     margin: 8px 0 8px 0;
 }
-#estrte_input_cont{
+.estrte_input_cont{
     width: 100%;
     min-height: 284px;
+    line-height: normal;
     font-size: var(--master-font-size);
     background-color: var(--input-background-color);
     font-family: verdana, arial, sans-serif;
     border: var(--comment-input-border);
 }
-#estrte_toolbar{
+.estrte_toolbar{
 	width: 100%;
 	font-size: var(--toolbar-font-size);
 	font-family: var(--master-font-family);
@@ -79,11 +83,10 @@ p{
 }
 select{
   width: 100%;
-  min-width: 15ch;
+  min-width: 12ch;
   border: 1px solid var(--select-border);
   border-radius: 2px;
   padding: var(--input-padding);
-  font-size: 1.25rem;
   cursor: pointer;
   line-height: 1.1;
   appearance: none;
@@ -91,7 +94,7 @@ select{
   margin: 0;
   cursor: inherit;
   line-height: inherit;
-  background: #ffffff url('../images/select_arrow.png') 97% 5px no-repeat;
+  background: #ffffff url('../images/select_arrow.png') 97% 2px no-repeat;
 }
 .estrte_toolbar_unit{
 	display: inline-block;
@@ -110,15 +113,20 @@ select{
 	color: var(--toolbar-caption-color);
     margin:	4px 0px 4px 2px;
 }
+.estrte_unit_caption label{
+	color: var(--toolbar-caption-color);
+	background-color: var(--background-theme-color);
+}
 .estrte_unit_input{
-	display: inline-block;
-	padding: 3px 6px 3px 6px;
+    width: 42px;
+    display: inline-block;
+    text-align: center;
+    padding: 3px 2px 3px 2px;
 }
 .estrte_unit_input label{
 	display: inline-block;
 	color: var(--toolbar-caption-color);
 	background-color: transparent;
-	margin: 2px;
 }
 .estrte_unit_input_select{
 	color: var(--toolbar-caption-color);
@@ -130,7 +138,7 @@ select{
 	font-size: 16px;
 	border: solid 1px #8b8b8b;
 }
-#estrte_content_wrapper{
+.estrte_content_wrapper{
 	height: 100%;
     background-color: var(--input-background-color); 
 }
@@ -164,11 +172,11 @@ padding: 2px 8px 2px 8px;
 	color: var(--text-color);
 	background-color: transparent;
 }
-#estrte_show_color_select{
+.estrte_show_color_select{
 	display: inline-block;
 	position: relative;
 }
-#estrte_color_monitor{
+.estrte_color_monitor{
 	display:inline-block;
     width: 32px;
     height: 32px;
@@ -185,16 +193,19 @@ padding: 2px 8px 2px 8px;
 }
 .estrte_colorRowCont{
 	display: inline-block;
+    margin-bottom: 4px;
 	vertical-align: top;
 }
-#estrte_setColorRow{
+.estrte_setColorRow{
 	display: block;
 }
-#estrte_LowerSetColorRow{
+.estrte_LowerSetColorRow{
 	display: block;
 }
 .estrte_setColorUnit{
 	display: inline-block;
+	width: 28px;
+    margin-right: 1px;
 }
 #estrte_select_estrte_emojis_div{
 	display: none;
@@ -228,7 +239,7 @@ padding: 2px 8px 2px 8px;
 	cursor: pointer;
 	margin-left: 24px;
 }
-#table_spec{
+.table_spec{
 	top: 8px;
 	margin-left: auto;
 	margin-right: auto;
@@ -236,14 +247,19 @@ padding: 2px 8px 2px 8px;
 	border-radius: 4px;
 	padding: 6px 10px 6px 10px;
 }
-#table_spec_heading{
-	font-size: 32px;
-	font-weight: bold;
-    color: var(--heading-text-color);
-	margin-bottom: var(--form-row-margin-bottom);
-	padding-left: 6px;
+.table_spec_heading{
+	font-size: 28px;
+	margin-bottom: 0;
+}
+.estrte_select_features_div{
+	width: 100%;
+ height: 0px;
+ overflow: hidden;
 }
 .table_spec_form{
+	width: 100%;
+	height: auto;
+	overflow: hidden;
 	color: var(--text-color);
 	background-color: #ffffff;
 	margin-top: 8px;
@@ -262,52 +278,64 @@ padding: 2px 8px 2px 8px;
     margin-right: 12px;
     cursor: pointer;
 }
+.spec_features_head{
+font-size: 140%;
+	font-weight: bold;
+    color: var(--heading-text-color);
+	margin-bottom: var(--form-row-margin-bottom);
+	padding-left: 6px;
+}
 .link_spec_div{
 	display: inline-block;
 	cursor: pointer;
 }
-.table_spec_form input :[type="button"]{
+.table_spec_form input[type="button"]{
 	color: var(--text-color);
 	width: 228px;
     height: 34px;
     border: var(--input-border);
 }
-.table_spec_row input :[type="button"]{
+.table_spec_row input[type="button"]{
 	color: var(--text-color);
-	width: 228px;
+	width: 72px;
     height: 34px;
     border: var(--input-border);
 }
-.table_spec_input input{
+.table_spec_input input select{
 	color: var(--text-color);
-	width: 228px;
-    height: 34px;
+	width: 100%;
+    height: 22px;
     border: var(--input-border);
 }
-.table_spec_form select{
+.table_spec_form input, select{
+	width: 100%;
 	color: var(--text-color);
-	width: 228px;
-    height: 34px;
+    height: 22px;
     border: var(--input-border);
 }
-#addTableButton{
+.addTableButton{
 	cursor: pointer;
-	font-size: 28px;
+	font-size: 18px;
 	font-weight: bold;
 	cursor: pointer;
     border: var(--input-border);
-    padding: 4px 8px 4px 8px;
+    padding: 1px 8px 1px 8px;
 }
 .table_spec_row{
-	display: block;
+	width: 98%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 	margin-bottom: var(--form-row-margin-bottom);
 }
 .table_spec_caption{
 	display: inline-block;
-	width: 88px;
+	width: 58%;
+	text-align: left;
 	vertical-align: middle;
 	color: var(--toolbar-caption-color);
 	background-color: var(--background-theme-color);
+	margin-bottom: 2px;
 }
 .table_spec_caption label{
 vertical-align: bottom;
@@ -316,6 +344,14 @@ vertical-align: bottom;
 }
 .table_spec_input{
 	display: inline-block;
+	float: right;
+	width: 38%;
+}
+.table_spec_input input, select{
+	width: 100%;
+	color: var(--text-color);
+    height: 22px;
+    border: var(--input-border);
 }
 .input_table{
 	
@@ -336,10 +372,10 @@ display: block;
     padding: var(--table-cell-padding);
     border: var(--lines);
 }
-#estrte_undo{
+.estrte_undo{
 	display:none;
 }
-#estrte_redo{
+.estrte_redo{
 	display:none;
 }
 .estrte_setSetColorLabel{
@@ -387,7 +423,6 @@ padding: var(--input-padding);
 }
 #estrte_color_pallette{
 	background-color: #ffffff;
-	padding: 3px;
 }
 #estrte_colorPickerDivLower{
 	margin-top: 8px;
@@ -409,6 +444,9 @@ padding: var(--input-padding);
     -ms-user-select: none;
     user-select: none; 
 }
+.estrte_slidecontainer label{
+ background-color: #ffffff;
+}
 .estrte_toolbar_slider{
 	-webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -426,18 +464,24 @@ padding: var(--input-padding);
 }
 #estrte_select_features_div{
     display: none;
-    border: 2px solid #c9c9c9;
+    border: 1px solid #c9c9c9;
     width: 100%;
-    max-height: 340px;
     overflow-y: overlay;
 }
 .estrte_emojis_category{
 	display: block;
 	color: var(--toolbar-caption-color);
 }
+.estrte_emojis_category_show input[type="button"]{
+	width: auto;
+	color: var(--toolbar-caption-color);
+	border: none;
+}
 .estrte_emojis_category label{
-	color: var(--label-text-color);
+	color: var(--heading-text-color);
+   background-color: #ffffff;
 	cursor: pointer;
+	font-weight: bold;
 }
 #estrte_emojis input[type="button"]{
 border:none;
@@ -459,6 +503,7 @@ input[type=range] {
   -webkit-appearance: none;
   margin: 1px 0;
   width: 100%;
+  border: none;
 }
 input[type=range]:focus {
   outline: none;
@@ -602,18 +647,16 @@ background-image: linear-gradient(to right, #797979, #d0d0d0);
 }
 
 @media (max-width: 594px){
-#estrte_toolbar{
+.estrte_toolbar{
 	width: 100%;
 	font-size: var(--mobile-toolbar-font-size);
 	margin-bottom: var(--mobile-form-row-margin-bottom);
 	
 }
-#estrte_select_features_div{
-    border: 2px solid #c9c9c9;
-    max-height: 180px;
+.estrte_select_features_div{
     overflow-y: overlay;
 }
-#estrte_input_cont{
+.estrte_input_cont{
     width: 100%;
     min-height: 262px;
     font-size: var(--mobile-master-font-size);
@@ -624,18 +667,19 @@ background-image: linear-gradient(to right, #797979, #d0d0d0);
 .table_spec_form{
 	margin-top: 0;
 }
-#table_spec_heading{
+.table_spec_heading{
 	font-size: 28px;
 	margin-bottom: 0;
 }
-#estrte_color_pallette{
+.estrte_color_pallette{
 padding: 1px;
 }.estrte_setSetColorLabel {
     width: 24px;
     height: 24px;
 	}
 .table_spec_row{
-	display: block;
+	display: inline-block;
+	width: 100%;
 	margin-bottom: var(--mobile-form-row-margin-bottom);
 }
 .table_spec_row .estrte_setTextColorLabel{
@@ -647,15 +691,10 @@ padding: var(--mobile-input-padding);
     padding: var(--mobile-table-cell-padding);
 }
 	.table_spec_caption{
-		display: block;
 		margin-bottom: 4px;
-		width:auto;
-	}
-	.table_spec_row{
-		width: 100%;
 	}
 	.table_spec_input{
-		width: 100%;
+	margin-bottom: var(--mobile-form-row-margin-bottom);
 	}
 	.table_spec_input select{
 		width: 100%;

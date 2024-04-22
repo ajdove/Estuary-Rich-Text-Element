@@ -7,13 +7,12 @@ const estrte_default_text_color = "75, 75,75";
 const estrte_default_background_color = "255, 255, 255";
 const estrte_default_font = "Arial";
 const estrte_default_font_size = "16";
-const estrte_toggle_speed = 700; // number of milliseconds for toggle elements such as "show colors" ans "show emojis" to open / close.
+const estrte_animation_dur = 148; // number of milliseconds for toggle elements such as "show colors" ans "show emojis" to open / close.
 const estrte_emoji_categories = ["symbols", "faces", "people", "animals", "nature", "activity", "objects", "food", "travel"];
-
 var estrte_textColor = getComputedStyle(document.getElementById("estrte_color_monitor")).getPropertyValue('--text-color');
 var estrte_textColorArray = estrte_textColor.substring(estrte_textColor.indexOf('(') + 1, estrte_textColor.indexOf(')')).split(",");
 
-let estrte_select_colour_div_html = '<div class="table_spec_form" id="link_spec_form"><div id="table_spec_heading">Colours<span class="close_window" title="Close" onclick="close_select_features_div()">x</span></div>';
+let estrte_select_colour_div_html = '<div class="table_spec_form" id="link_spec_form"><div class="spec_features_head">Colours<div class="close_window" title="Close" onclick="close_select_features_div()"><img src="/est_rte/images/close_menu.png" alt="" /></div></div>';
 estrte_select_colour_div_html +='<div class="estrte_color_pallette" id="estrte_color_pallette">';
 estrte_select_colour_div_html += '<div class="estrte_colorRowCont"><div id="estrte_setColorRow"></div>';
 estrte_select_colour_div_html += '<div class="estrte_LowerSetColorRow" id="estrte_lowerSetColorRow"></div>';
@@ -34,9 +33,7 @@ estrte_select_colour_div_html += '</div>';
 estrte_select_colour_div_html += '<div class="estrte_colorPickerDivLower" id="estrte_colorPickerDivLower"><label class="estrte_setTextColorLabel" id="estrte_setTextColorLabelColor" onclick="estrte_setColor(\'color\')">Set Color</label>';
 estrte_select_colour_div_html += '<label class="estrte_setTextColorLabel" id="estrte_setTextColorLabelBgColor" onclick="estrte_setBackgroundColor()">Set Background</label></div></div>';
 
-
-
-            let table_html = '<div class="table_spec_form" id="table_spec_form"><div id="table_spec_heading">Table Properties<span class="close_window" title="Close" onclick="close_select_features_div()">x</span></div>';
+            let table_html = '<div class="table_spec_form" id="table_spec_form"><div class="spec_features_head">Table Properties<span class="close_window" title="Close" onclick="close_select_features_div()"><img src="/est_rte/images/close_menu.png" alt="" /></div></div>';
             table_html += '<div class="table_spec_row"><div class="table_spec_caption"><label>Heading</label></div><div class="table_spec_input"><input type="text" name="table_caption" id="table_caption" /></div></div>';
             table_html += '<div class="table_spec_row"><div class="table_spec_caption"><label>Rows</label></div><div class="table_spec_input"><select name="no_of_rows_select" id="no_of_rows_select"></select></div></div>';
             table_html += '<div class="table_spec_row"><div class="table_spec_caption"><label>Columns</label></div><div class="table_spec_input"><select name="no_of_columns_select" id="no_of_columns_select"></select></div></div>';
@@ -44,15 +41,15 @@ estrte_select_colour_div_html += '<label class="estrte_setTextColorLabel" id="es
             table_html += '<div class="table_spec_row"><div class="table_spec_caption"><label>Cell Spacing</label></div><div class="table_spec_input"><select name="cellspacing_select" id="cellspacing_select"></select></div></div>';
             table_html += '<div class="table_spec_row"><div class="table_spec_caption"><label>Cell Padding</label></div><div class="table_spec_input"><select name="cellpadding_select" id="cellpadding_select"></select></div></div>';
             table_html += '<div class="table_spec_row"><div class="table_spec_caption"><label>Headers</label></div><div class="table_spec_input"><select name="select_headers" id="select_headers"><option value="">None</option><option value="firstRow">First Row</option><option value="firstColumn">First Column</option><option value="both">Both</option></select></div></div>';
-            table_html += '<div class="table_spec_row"><div class="table_spec_caption"><label id="addTableButton" unselectable="on" onclick="add_table()">Add</label></div></div></div>';
+            table_html += '<div class="table_spec_row"><div class="table_spec_caption"><label class="addTableButton" unselectable="on" onclick="add_table()">Add</label></div></div></div>';
 
 
 
 
-let link_html = '<div class="table_spec_form" id="link_spec_form"><div id="table_spec_heading">Add Link<span class="close_window" title="Close" onclick="close_select_features_div()">x</span></div>';
+let link_html = '<div class="table_spec_form" id="link_spec_form"><div class="spec_features_head">Add Link<span class="close_window" title="Close" onclick="close_select_features_div()"><img src="/est_rte/images/close_menu.png" alt="" /></div></div>';
 link_html += '<div class="table_spec_row"><div class="table_spec_caption"><label>Text</label></div><div class="table_spec_input"><input type="text" name="link_text" id="link_text" /></div></div>';
 link_html += '<div class="table_spec_row"><div class="table_spec_caption"><label>URL</label></div><div class="table_spec_input"><input type="text" name="link_url" id="link_url" /></div></div>';
-link_html += '<div class="table_spec_row"><div class="table_spec_caption"><div class="table_spec_input"><label id="addTableButton" unselectable="on" onclick="add_link()">Add</label></div></div></div></div>';
+link_html += '<div class="table_spec_row"><div class="table_spec_caption"><div class="table_spec_input"><label class="addTableButton" unselectable="on" onclick="add_link()">Add</label></div></div></div></div>';
 
 
 /*  Styles included  */
@@ -1759,13 +1756,53 @@ let estrte_prevAdd = 'no';
 let table_spec_active = false;
 let link_spec_active = false;
 let estrte_color_editing = false;
-let estrte_select_estrte_emojis_div_html = '<div class="table_spec_form" id="link_spec_form"><div id="table_spec_heading">Emojis<span class="close_window" title="Close" onclick="close_select_features_div()">x</span></div><div id="estrte_emojis"></div></div>';
+let estrte_select_estrte_emojis_div_html = '<div class="table_spec_form" id="link_spec_form"><div class="spec_features_head">Emojis<span class="close_window" title="Close" onclick="close_select_features_div()"><img src="/est_rte/images/close_menu.png" alt="" /></div></div><div id="estrte_emojis"></div></div>';
 let estrte_emojis_list = '<div id="estrte_emojis_list"><div class="estrte_emojis_category" id="emojisgeneral" inputmode="none" unselectable="on"><div class="estrte_emojis_category_show" id="emojis_showgeneral"></div></div>';
 for (let i = 0; i < estrte_emoji_categories.length; i++) {
       var category = estrte_emoji_categories[i];
       estrte_emojis_list += '<div class="estrte_emojis_category" id="emojis'+ category + '" inputmode="none" unselectable="on"><label>' + category + '&nbsp;</label><div class="estrte_emojis_category_show" id="emojis_show'+ category + '"></div></div>';
       }
 estrte_emojis_list += '</div>';
+
+
+function slideDown(value){
+    target = document.getElementById("estrte_select_features_div");
+    target.style.removeProperty('display');
+    let display = window.getComputedStyle(target).display;
+    let toolbar = document.getElementById("estrte_toolbar");
+    let targetWidth = window.getComputedStyle(toolbar).width;
+  if (display === 'none')
+      display = 'block';
+
+    target.style.height = 0;
+    target.style.display = display;
+    let height = target.offsetHeight;
+    target.style.position = "relative";  // can be changed to absolue if 
+  //  target.style.width = targetWidth;
+    target.style.width = '100%';
+    target.style.transitionProperty = 'height, margin, padding';
+    target.style.transitionDuration = estrte_animation_dur + 'ms';
+    target.style.overflow = 'hidden';
+    target.style.height = value;
+    target.style.paddingTop = 0;
+    target.style.paddingBottom = 0;
+    target.style.marginTop = 0;
+    target.style.marginBottom = 0;
+    target.offsetHeight;
+    target.style.boxSizing = 'border-box';
+ //   target.style.height = height + 'px';
+    target.style.removeProperty('padding-top');
+    target.style.removeProperty('padding-bottom');
+    target.style.removeProperty('margin-top');
+    target.style.removeProperty('margin-bottom');
+    window.setTimeout( () => {
+    target.style.height = 'auto';
+  //    target.style.removeProperty('height');
+      target.style.removeProperty('overflow');
+      target.style.removeProperty('transition-duration');
+      target.style.removeProperty('transition-property');
+    }, estrte_animation_dur);
+  }
 
 function insertAfter(newNode, existingNode) {
     existingNode.parentNode.insertBefore(newNode, existingNode.nextSibling);
@@ -1891,8 +1928,7 @@ function estrte_sanitise_input_content(inputHtmlRaw){
     '"': '&quot;',
     "'": '&#039;'
   };
-let inputHtml = inputHtmlRaw.replace('id="estrte_input_field"', 'id="pref"');
-inputHtml = inputHtml.replace(/[&<>"']/g, function(m) { return map[m]; });
+let inputHtml = inputHtmlRaw.replace(/[&<>"']/g, function(m) { return map[m]; });
 inputHtml = inputHtml.replace(/name=&quot;estrte_input_field&quot;/g, '');  
 inputHtml = inputHtml.replace(/id=&quot;estrte_input_field&quot;/g, '');  
 inputHtml = inputHtml.replace(/id=&quot;estrte_content_wrapper&quot;/g, '');  
@@ -1907,10 +1943,10 @@ function estrte_remove_placeholder(){
 	let newHTML;
 	let elList = document.getElementsByTagName("*");
 	for(let i = 0; i < elList.length; i++){
-		if(elList[i].innerHTML == '<span class="est_placeholder">-</span>'){
+		if(elList[i].innerHTML == '<span class="est_placeholder">-</div>'){
 		let thisParentElementId = elList[i].id;
 existingHTML = document.getElementById(thisParentElementId).innerHTML;
-newHTML = existingHTML.replace('<span class="est_placeholder">-</span>', '');
+newHTML = existingHTML.replace('<span class="est_placeholder">-</div>', '');
 document.getElementById(thisParentElementId).innerHTML = newHTML;
 document.getElementById(thisParentElementId).removeEventListener("keydown", estrte_remove_placeholder, true);
 return;
@@ -1923,6 +1959,7 @@ function estrte_set_current_style(styleToAdd, newValue){
 }
       
 function estrte_add_style(styleToAdd, newValue){
+estrte_remove_placeholder();
     estrte_color_editing = false;
   let estrte_prevDelete = 'no';
   let selectedText;
@@ -1991,8 +2028,10 @@ document.getElementById("estrte_input_field").contentEditable = false;
   let inserted_divs = document.getElementsByClassName("inserted_div");
          let inserted_divsLength = inserted_divs.length;
         for(let i = 0; i < inserted_divsLength; i++){
-        	inserted_divs[i].contentEditable = false;
-        inserted_divs[i].addEventListener("click", function(){inserted_divs[i].contentEditable = true});
+        	inserted_divs[i].contentEditable = false;        
+        	inserted_divs[i].addEventListener("click", function(){inserted_divs[i].contentEditable = true});
+        	inserted_divs[i].addEventListener("mousedown", function(){inserted_divs[i].contentEditable = true});
+        	inserted_divs[i].addEventListener("touchstart", function(){inserted_divs[i].contentEditable = true});
         }
            let el = document.createElement("div");
             el.innerHTML = '';
@@ -2010,7 +2049,9 @@ document.getElementById("estrte_input_field").contentEditable = false;
               range.collapse(true);
               sel.removeAllRanges();
               sel.addRange(range);
-        document.getElementById("estrte_input_field").addEventListener("click", function(){document.getElementById("estrte_input_field").contentEditable = true});
+document.getElementById("estrte_input_field").addEventListener("click", function(){document.getElementById("estrte_input_field").contentEditable = true});
+document.getElementById("estrte_input_field").addEventListener("mousedown", function(){document.getElementById("estrte_input_field").contentEditable = true});
+document.getElementById("estrte_input_field").addEventListener("touchstart", function(){document.getElementById("estrte_input_field").contentEditable = true});
 document.getElementById(unix).contentEditable = true;
 setTimeout(function(){document.getElementById(unix).focus();}, 200);
 
@@ -2061,6 +2102,7 @@ new_log = {"pre_edit": origInputText, "post_edit": newInputText, "type_of_edit":
 		let number_of_edits = estrte_fragments_log.length;
  }
 function estrte_format(styleToAdd){
+estrte_remove_placeholder();
   let estrte_color_editing = false;
   let existingHTML;
   let estrte_prevDelete = 'no';
@@ -2144,8 +2186,12 @@ document.getElementById("estrte_input_field").contentEditable = false;
         for (let i = 0; i < inserted_divsLength; i++){
         	inserted_divs[i].contentEditable = false;
         	inserted_divs[i].addEventListener("click", function(){inserted_divs[i].contentEditable = true});
+        	inserted_divs[i].addEventListener("mousedown", function(){inserted_divs[i].contentEditable = true});
+        	inserted_divs[i].addEventListener("touchstart", function(){inserted_divs[i].contentEditable = true});
         }
 document.getElementById("estrte_input_field").addEventListener("click", function(){document.getElementById("estrte_input_field").contentEditable = true});
+document.getElementById("estrte_input_field").addEventListener("mousedown", function(){document.getElementById("estrte_input_field").contentEditable = true});
+document.getElementById("estrte_input_field").addEventListener("touchstart", function(){document.getElementById("estrte_input_field").contentEditable = true});
         let already = false;
 			let sel = window.getSelection();
             	let initialFocus = unix;
@@ -2409,24 +2455,48 @@ document.getElementById("estrte_input_field").contentEditable = false;
         for (let i = 0; i < inserted_divsLength; i++){
         	inserted_divs[i].contentEditable = false;
         	inserted_divs[i].addEventListener("click", function(){inserted_divs[i].contentEditable = true});
+        	inserted_divs[i].addEventListener("mousedown", function(){inserted_divs[i].contentEditable = true});
+        	inserted_divs[i].addEventListener("touchstart", function(){inserted_divs[i].contentEditable = true});
         }
 document.getElementById("estrte_input_field").addEventListener("click", function(){document.getElementById("estrte_input_field").contentEditable = true});
+document.getElementById("estrte_input_field").addEventListener("mousedown", function(){document.getElementById("estrte_input_field").contentEditable = true});
+document.getElementById("estrte_input_field").addEventListener("touchstart", function(){document.getElementById("estrte_input_field").contentEditable = true});
 				if(estrte_color_editing){
-					console.log("estrte_color_editing " + estrte_color_editing);
 				document.getElementById(estrte_color_editing).style.color = newColor;
-			//	setTimeout(document.getElementById(estrte_color_editing).focus(), 100);
-				estrte_to_focus = estrte_color_editing;
 				}else{
 			let sel = window.getSelection();
           if (sel.getRangeAt && sel.rangeCount) {
+document.getElementById( "estrte_input_field").contentEditable = false;
+  inserted_divs = document.getElementById( "estrte_input_field").getElementsByClassName("inserted_div");
+         inserted_divsLength = inserted_divs.length;
+        for (let i = 0; i < inserted_divsLength; i++){
+        	inserted_divs[i].contentEditable = false;
+        	inserted_divs[i].addEventListener("click", function(){inserted_divs[i].contentEditable = true});
+        	inserted_divs[i].addEventListener("mousedown", function(){inserted_divs[i].contentEditable = true});
+        	inserted_divs[i].addEventListener("touchstart", function(){inserted_divs[i].contentEditable = true});
+        }
+   if(parentElementId == undefined){
+  inserted_divs = document.getElementById("estrte_input_field").getElementsByClassName("inserted_div");
+         inserted_divsLength = inserted_divs.length;
+        newRangecont = elementsArray[elementsArray.length - 1];
+          elementsArray = [ "estrte_input_field"];
+        for(let i = 0; i < inserted_divsLength; i++){
+            elementsArray.push(inserted_divs[i].id);
+					}
+         range = document.createRange();
+        range.setStart(document.getElementById(elementsArray[elementsArray.length - 1]), document.getElementById(elementsArray[elementsArray.length - 1]).length - 1);
+			}else{
             range = sel.getRangeAt(0);
+            }
             range.deleteContents();
            let el = document.createElement("div");
-            el.innerHTML = '';
+            el.innerHTML = '<span class="est_placeholder">-</div>';
             el.id = unix;
             el.className = "inserted_div";
             el.style = "color:" + newColor + ";";
             el.addEventListener("click", {stopPropagation: true});
+            el.addEventListener("mousedown", {stopPropagation: true});
+            el.addEventListener("touchstart", {stopPropagation: true});
             let docFrag = document.createDocumentFragment();
            let node = el;
              let lastNode = docFrag.appendChild(node);
@@ -2436,14 +2506,26 @@ document.getElementById("estrte_input_field").addEventListener("click", function
               range.collapse(true);
               sel.removeAllRanges();
               sel.addRange(range);
+document.getElementById(unix).addEventListener("keydown", estrte_remove_placeholder, true);
+document.getElementById(unix).addEventListener("touchstart", estrte_remove_placeholder, true);
+document.getElementById("estrte_input_field").addEventListener("click", function(){document.getElementById("estrte_input_field").contentEditable = true});
+document.getElementById("estrte_input_field").addEventListener("mousedown", function(){document.getElementById("estrte_input_field").contentEditable = true});
+document.getElementById("estrte_input_field").addEventListener("touchstart", function(){document.getElementById("estrte_input_field").contentEditable = true});
             style_added = true;
           }
-estrte_to_focus = unix;
+//estrte_to_focus = unix;
 				}
-console.log(unix + " estrte_to_focus " + estrte_to_focus);
+  inserted_divs = document.getElementById("estrte_input_field").getElementsByClassName("inserted_div");
+    inserted_divsLength = inserted_divs.length;
+        elementsArray = ["estrte_input_field"];
+        for(let i = 0; i < inserted_divsLength; i++){
+            elementsArray.push(inserted_divs[i].id);
+					}
+    estrte_to_focus = elementsArray[elementsArray.length - 1];
 document.getElementById(estrte_to_focus).contentEditable = true;
-setTimeout(function(){document.getElementById(estrte_to_focus).focus();}, 200);
-estrte_color_editing = estrte_to_focus;
+setTimeout(function(){
+document.getElementById(estrte_to_focus).focus();
+estrte_color_editing = estrte_to_focus;}, 200);
 			}else{
 				
 	            if (window.getSelection){
@@ -2585,7 +2667,9 @@ document.getElementById("estrte_input_field").contentEditable = false;
         	inserted_divs[i].contentEditable = false;
             inserted_divs[i].addEventListener("click", function(){inserted_divs[i].contentEditable = true});
         }
-    document.getElementById("estrte_input_field").addEventListener("click", function(){document.getElementById("estrte_input_field").contentEditable = true});
+document.getElementById("estrte_input_field").addEventListener("click", function(){document.getElementById("estrte_input_field").contentEditable = true});
+document.getElementById("estrte_input_field").addEventListener("mousedown", function(){document.getElementById("estrte_input_field").contentEditable = true});
+document.getElementById("estrte_input_field").addEventListener("touchstart", function(){document.getElementById("estrte_input_field").contentEditable = true});
         
          
          inserted_elements = document.getElementsByClassName("inserted_div");
@@ -2599,7 +2683,7 @@ document.getElementById("estrte_input_field").contentEditable = false;
             let el = document.createElement("p");
             el.id = unix;
             el.className = "inserted_div";
-            el.innerHTML = '<span class="est_placeholder">-</span>';
+            el.innerHTML = '<span class="est_placeholder">-</div>';
             el.addEventListener("click", {stopPropagation: true});
             docFrag = document.createDocumentFragment();
             let node = el;
@@ -2755,7 +2839,9 @@ document.getElementById("estrte_input_field").contentEditable = false;
         inserted_divs[i].contentEditable = false;
         inserted_divs[i].addEventListener("click", function(){inserted_divs[i].contentEditable = true});
         }
-    document.getElementById("estrte_input_field").addEventListener("click", function(){document.getElementById("estrte_input_field").contentEditable = true});
+document.getElementById("estrte_input_field").addEventListener("click", function(){document.getElementById("estrte_input_field").contentEditable = true});
+document.getElementById("estrte_input_field").addEventListener("mousedown", function(){document.getElementById("estrte_input_field").contentEditable = true});
+document.getElementById("estrte_input_field").addEventListener("touchstart", function(){document.getElementById("estrte_input_field").contentEditable = true});
    let first_layer_inserted_elements = new Array();
           if(inserted_divsLength == 0){
           	if(document.getElementById("estrte_input_field").children.length > 0){
@@ -2793,7 +2879,7 @@ document.getElementById("estrte_input_field").contentEditable = false;
             elId = unix.toString() + "b";
             el.id = elId;
             el.className = "inserted_div";
-            el.innerHTML = '<span class="est_placeholder">-</span>';
+            el.innerHTML = '<span class="est_placeholder">-</div>';
             el.addEventListener("click", {stopPropagation: true});
             if(styledElement){
 			el.style = styledElement.style.cssText;
@@ -2844,7 +2930,9 @@ document.getElementById("estrte_input_field").contentEditable = false;
         inserted_divs[i].contentEditable = false;
         inserted_divs[i].addEventListener("click", function(){inserted_divs[i].contentEditable = true});
         }
-    document.getElementById("estrte_input_field").addEventListener("click", function(){document.getElementById("estrte_input_field").contentEditable = true});
+document.getElementById("estrte_input_field").addEventListener("click", function(){document.getElementById("estrte_input_field").contentEditable = true});
+document.getElementById("estrte_input_field").addEventListener("mousedown", function(){document.getElementById("estrte_input_field").contentEditable = true});
+document.getElementById("estrte_input_field").addEventListener("touchstart", function(){document.getElementById("estrte_input_field").contentEditable = true});
    let first_layer_inserted_elements = new Array();
           if(inserted_divsLength == 0){
           	if(document.getElementById("estrte_input_field").children.length > 0){
@@ -2878,7 +2966,7 @@ document.getElementById("estrte_input_field").contentEditable = false;
             elId = unix.toString() + "c";
             el.id = elId;
             el.className = "inserted_div";
-            el.innerHTML = '<span class="est_placeholder">-</span>';
+            el.innerHTML = '<span class="est_placeholder">-</div>';
             el.addEventListener("click", {stopPropagation: true});
             if(styledElement){
 			el.style = styledElement.style.cssText;
@@ -2903,13 +2991,35 @@ new_log = {"pre_edit": origInputText, "post_edit": newInputText, "type_of_edit":
  	close_select_features_div();
 }
 function  estrte_show_select_color_div(){
+//  getCaretPosition(document.getElementById("estrte_input_field"));
     estrte_color_editing = false;
-document.getElementById("estrte_select_features_div").style.display = "block";
+var estrte_textColor = getComputedStyle(document.getElementById("estrte_color_monitor")).getPropertyValue('--text-color');
+var estrte_textColorArray = estrte_textColor.substring(estrte_textColor.indexOf('(') + 1, estrte_textColor.indexOf(')')).split(",");
+let estrte_select_colour_div_html = '<div class="table_spec_form" id="color_select_form" style="position:relative;" contenteditable="false"  unselectable="on" inputmode="none"><div class="spec_features_head" class="spec_features_head" contenteditable="false"  unselectable="on" inputmode="none">Colours<div class="close_window" title="Close" inputmode="none" unselectable="on" contentEditable = false inputmode="none" onclick="close_select_features_div()"><img src="/est_rte/images/close_menu.png" alt="" /></div></div>';
+estrte_select_colour_div_html +='<div class="estrte_color_pallette" id="estrte_color_pallette" contenteditable="false" unselectable="on" inputmode="none">';
+estrte_select_colour_div_html += '<div class="estrte_colorRowCont"><div class="estrte_setColorRow" id="estrte_setColorRow" contenteditable="false"  unselectable="on" inputmode="none"></div>';
+estrte_select_colour_div_html += '<div class="estrte_lowerSetColorRow" class="estrte_lowerSetColorRow" id="estrte_lowerSetColorRow" contenteditable="false"  unselectable="on" inputmode="none"></div>';
+estrte_select_colour_div_html += '</div>';
+estrte_select_colour_div_html += '<div class="estrte_slidecontainer" contentEditable = false><label for="redComp" class="estrte_colorLabel" unselectable="on" inputmode="none" contentEditable = false>Red</label><input type="range" class="estrte_toolbar_slider" min="0" max="255" value="';
+estrte_select_colour_div_html += estrte_textColorArray[0];
+estrte_select_colour_div_html += '" step=1 class="slider" name="redComp" id="redComp" contenteditable="false" unselectable="on" inputmode="none" onchange="estrte_setColor(\'red\')">';
+estrte_select_colour_div_html += '<label for="greenComp" class="estrte_colorLabel" inputmode="none" contentEditable = false>Green</label><input type="range" class="estrte_toolbar_slider" min="0" max="255" value="'
+estrte_select_colour_div_html += estrte_textColorArray[1];
+estrte_select_colour_div_html += '" step=1 class="slider" name="greenComp" id="greenComp" contenteditable="false"  unselectable="on" inputmode="none" onchange="estrte_setColor(\'green\')">';
+estrte_select_colour_div_html += '<label for="blueComp" class="estrte_colorLabel" inputmode="none" contentEditable = false>Blue</label><input type="range" class="estrte_toolbar_slider" min="0" max="255" value="';
+estrte_select_colour_div_html += estrte_textColorArray[2];
+estrte_select_colour_div_html += '" step=1 class="slider" name="blueComp" id="blueComp" contenteditable="false"  unselectable="on" inputmode="none" onchange="estrte_setColor(\'blue\')">';
+estrte_select_colour_div_html += '<label for="shadeComp" class="estrte_colorLabel" inputmode="none" contentEditable = false>Shade</label><input type="range" class="estrte_toolbar_slider" min="0" max="100" value="50" step=1 class="slider" name="shadeComp" id="shadeComp" contenteditable="false"  unselectable="on" inputmode="none" onchange="estrte_setColor(\'shade\')">';
+estrte_select_colour_div_html += '<input type="hidden" name="tempRed" id="tempRed" value="u" /><input type="hidden" name="tempGreen" id="tempGreen" value="u" /><input type="hidden" name="tempBlue" id="tempBlue" value="u" />';
+estrte_select_colour_div_html += '</div>';
+estrte_select_colour_div_html += '</div>';
+estrte_select_colour_div_html += '<div class="estrte_colorPickerDivLower" id="estrte_colorPickerDivLower"><label class="estrte_setTextColorLabel" id="estrte_setTextColorLabelColor" onclick="estrte_setColor(\'color\')">Set Color</label>';
+estrte_select_colour_div_html += '<label class="estrte_setTextColorLabel" id="estrte_setTextColorLabelBgColor" onclick="estrte_setBackgroundColor()">Set Background</label></div></div>';
 document.getElementById("estrte_select_features_div").innerHTML = estrte_select_colour_div_html;
-        estrte_populate_colour_div('');
-        document.getElementById("estrte_input_field").addEventListener("keydown", function () {
-            close_select_features_div();
-        });
+let thisTarget = document.getElementById("estrte_select_features_div");
+slideDown("520px");
+
+estrte_populate_colour_div('');
  }
 function estrte_populate_colour_div(holder){
     estrte_color_editing = false;
@@ -2919,7 +3029,7 @@ function estrte_populate_colour_div(holder){
     for (let i = 0; i < estrte_rgb_colors.length; i++) {
                     let unix = new Date().valueOf();
                     thisId = unix + (Math.random() * 10000);
-  document.getElementById("estrte_setColorRow" + holder).innerHTML += '<div class="estrte_setColorUnit"><label id=' + thisId + ' class="estrte_setSetColorLabel" style="color:rgb(' + estrte_rgb_colors[i] + ');background-color:rgb(' + estrte_rgb_colors[i] + ');" onclick="estrte_setSetColor(' + estrte_rgb_colors[i] + ', 10)">Red</label></div>';
+  document.getElementById("estrte_setColorRow" + holder).innerHTML += '<div class="estrte_setColorUnit"><label id=' + thisId + ' class="estrte_setSetColorLabel" style="color:rgb(' + estrte_rgb_colors[i] + ');background-color:rgb(' + estrte_rgb_colors[i] + ');" unselectable="on" inputmode="none" readonly="readonly" onmousedown="estrte_setSetColor(' + estrte_rgb_colors[i] + ', 10)" ontouchstart="estrte_setSetColor(' + estrte_rgb_colors[i] + ', 10)">C</label></div>';
   if(estrte_rgb_colors[i] == "255, 255, 255"){
   	document.getElementById(thisId).style.border = 'solid 0.1px #8b8b8b';
   	document.getElementById("estrte_color_monitor").style.border = 'solid 0.3px #8b8b8b';
@@ -2930,18 +3040,12 @@ function estrte_populate_colour_div(holder){
 for (let i = 0; i < estrte_lower_rgb_colors.length; i++) {
                     let unix = new Date().valueOf();
                     thisId = unix + (Math.random() * 10000);
-  document.getElementById("estrte_lowerSetColorRow" + holder).innerHTML += '<div class="estrte_setColorUnit"><label id=' + thisId + ' class="estrte_setSetColorLabel" style="color:rgb(' + estrte_lower_rgb_colors[i] + ');background-color:rgb(' + estrte_lower_rgb_colors[i] + ');" onclick="estrte_setSetColor(' + estrte_lower_rgb_colors[i] + ', 10)">Red</label></div>';
-  if(estrte_lower_rgb_colors[i] == "255, 255, 255"){
-  	document.getElementById(thisId).style.border = 'solid 0.3px #8b8b8b';
-  	document.getElementById("estrte_color_monitor").style.border = 'solid 0.3px #8b8b8b';
-  }else{
-  	document.getElementById("estrte_color_monitor").style.border = "0";
-  }
+  document.getElementById("estrte_lowerSetColorRow" + holder).innerHTML += '<div class="estrte_setColorUnit"><label id=' + thisId + ' class="estrte_setSetColorLabel" style="color:rgb(' + estrte_lower_rgb_colors[i] + ');background-color:rgb(' + estrte_lower_rgb_colors[i] + ');" unselectable="on" inputmode="none" readonly="readonly" onmousedown="estrte_setSetColor(' + estrte_lower_rgb_colors[i] + ', 10)" ontouchstart="estrte_setSetColor(' + estrte_lower_rgb_colors[i] + ', 10)">C</label></div>';
 }
 }
 function estrte_show_select_estrte_emojis_div(){
     estrte_color_editing = false;
-document.getElementById("estrte_select_features_div").style.display = "block";
+slideDown("520px");
 document.getElementById("estrte_select_features_div").innerHTML = estrte_select_estrte_emojis_div_html;
         document.getElementById("estrte_emojis").innerHTML += estrte_emojis_list;
 estrte_emojis.forEach((emoji) => {
@@ -2953,23 +3057,24 @@ estrte_emojis.forEach((emoji) => {
 	}
 
       });
-        document.getElementById("estrte_input_field").addEventListener("keydown", function () {
-            close_select_features_div();
-        });
 }  
+
 function estrte_show_select_special_characters_div(){
     estrte_color_editing = false;
-document.getElementById("estrte_select_features_div").style.display = "block";
-    document.getElementById("estrte_select_features_div").innerHTML = '<div class="table_spec_form" id="link_spec_form"><div id="table_spec_heading">Special Characters<span class="close_window" title="Close" onclick="close_select_features_div()">x</span></div><div class="estrte_special_charsInput" id="estrte_special_chars"></div></div>'; 
-    for (let i = 0; i < estrte_special_chars.length; i++) {
-       document.getElementById("estrte_special_chars").appendChild(generateSpecialcharIcon(estrte_special_chars[i]));
-}
-        document.getElementById("estrte_input_field").addEventListener("keydown", function () {
+slideDown("520px");
+document.getElementById("estrte_select_features_div").innerHTML = '<div class="table_spec_form" id="spec_chars_list"><div class="spec_features_head" class="spec_features_head">Special Chars<span class="close_window" title="Close" inputmode="none" unselectable="on" onclick="close_select_features_div()"><img src="/est_rte/images/close_menu.png" alt="" /></div></div><div class="estrte_special_charsInput" id="estrte_special_chars"></div></div>';
+let this_special_select_html = document.getElementById("estrte_select_features_div").innerHTML;
+document.getElementById("estrte_select_features_div").innerHTML = this_special_select_html;
+estrte_special_chars.forEach((specialChar) => {
+       document.getElementById("estrte_special_chars").appendChild(generateSpecialcharIcon(specialChar));
+		});
+        document.getElementById("estrte_input_field").addEventListener("click", function () {
             close_select_features_div();
         });
 }
+
 function estrte_show_table_spec_div(){
-document.getElementById("estrte_select_features_div").style.display = "block";
+slideDown("520px");
 document.getElementById("estrte_select_features_div").innerHTML = table_html;
 for (let i = 1; i <= estrte_number_of_table_row_options; i++) {
   document.getElementById("no_of_rows_select").innerHTML += '<option value="' + i + '">' + i + "</option>";
@@ -3137,10 +3242,30 @@ document.getElementById("estrte_select_features_div").style.display = "block";
  	estrte_add_style('color', newColor);
  }
 
- function close_select_features_div(){
-document.getElementById("estrte_select_features_div").innerHTML = '';
-document.getElementById("estrte_select_features_div").style.display = "none";
-document.getElementById("estrte_input_field").removeEventListener("keydown", close_select_features_div);
+function close_select_features_div(){
+let target = document.getElementById("estrte_select_features_div");
+target.style.height = "400px";;
+target.style.transitionProperty = 'height, margin, padding'; /* [1.1] */
+target.style.transitionDuration = estrte_animation_dur + 'ms'; /* [1.2] */
+target.style.boxSizing = 'border-box'; /* [2] */
+target.style.height = target.offsetHeight + 'px'; /* [3] */
+target.style.height = 0; /* [4] */
+target.style.paddingTop = 0; /* [5.1] */
+target.style.paddingBottom = 0; /* [5.2] */
+target.style.marginTop = 0; /* [6.1] */
+target.style.marginBottom = 0; /* [7.2] */
+target.style.overflow = 'hidden'; /* [7] */
+window.setTimeout( () => {
+  target.style.display = 'none'; /* [8] */
+  target.style.removeProperty('height'); /* [9] */
+  target.style.removeProperty('padding-top');  /* [10.1] */ 
+  target.style.removeProperty('padding-bottom');  /* [10.2] */ 
+  target.style.removeProperty('margin-top');  /* [11.1] */ 
+  target.style.removeProperty('margin-bottom');  /* [11.2] */ 
+  target.style.removeProperty('overflow');  /* [12] */ 
+  target.style.removeProperty('transition-duration');  /* [13.1] */ 
+  target.style.removeProperty('transition-property');  /* [13.2] */ 
+}, estrte_animation_dur);
 }
  function ancestor(node, match){
   if(!node)
