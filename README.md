@@ -1,4 +1,4 @@
-! CURRENTLY WORKING ON ISSUES FOUND WITH SAFARI BROWSER
+POSSIBLY FURTHER IMPROVEMENTS TO THE USER INTERFACE. FIXED ISSUES FOUND WITH SAFARI BROWSER 
 
 Estuary RTE (Rich Text Element) is an input component to be used as part of a HTML form.  It is written completely in vanilla Javascript.
 
