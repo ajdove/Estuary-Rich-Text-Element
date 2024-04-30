@@ -81,6 +81,11 @@ p{
     font-family: var(--master-font-family);
     overflow-wrap: anywhere;
 }
+label{
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+  }
 select{
   width: 100%;
   min-width: 12ch;
