@@ -1821,15 +1821,22 @@ function insertAfter(newNode, existingNode) {
 	}
     
         let sel, range;
+        let date = new Date();
+        let unix = Math.round(+date / 1000);
         if (window.getSelection) {
           // IE9 + and non-IE
           sel = window.getSelection();
+        parentElementId =  sel.anchorNode.parentElement.id;
+          alert("selection " + parentElementId);
           
           if (sel.getRangeAt && sel.rangeCount) {
+          	alert("sofar");
+          	alert(sel.rangeCount);
             range = sel.getRangeAt(0);
             range.deleteContents();
             let el = document.createElement("div");
             el.innerHTML = html;
+            el.id = unix;
             el.className = "inserted_div";
             let docFrag = document.createDocumentFragment();
            let node = el;
@@ -1874,24 +1881,39 @@ function insertAfter(newNode, existingNode) {
        let table_html = document.getElementById("table_html_hidden").value;
         pasteHtmlAtCaret(table_html);
       }
-      function generateEmojiIcon(emoji, title) {
-        let input = document.createElement("input");
+function generateEmojiIcon(emoji, title) {
+        let date = new Date();
+   //     let unix = Math.round(+date / 1000);
+        input = document.createElement("input");
         input.type = "button";
+     //   input.id = unix;
         input.value = emoji;
         input.title = title;
         input.innerText = {emoji};//caption on button
-        input.addEventListener("click", addToDiv);
+        input.addEventListener("click", function(){
+        let estrte_input_field = document.getElementById("estrte_input_field");
+        pasteHtmlAtCaret(emoji);
+        close_select_features_div();
+        });
         return input;
-      }
-      function generateSpecialcharIcon(specChar) {
+}      
+function generateSpecialcharIcon(specChar) {
+                    const date = new Date();
+const unix = Math.round(+date / 1000);
         let input = document.createElement("input");
         input.type = "button";
+        input.id = unix;
         input.value = specChar;
         input.innerText = specChar;//caption on button
-        input.addEventListener("click", specCharAddToDiv);
+        input.addEventListener("click", function(){
+        let estrte_input_field = document.getElementById("estrte_input_field");
+    //    estrte_input_field.focus();
+        pasteHtmlAtCaret(`${specChar}`);
+        close_select_features_div();
+        });
         return input;
       }
-      function setDocMode(toSource) {
+function setDocMode(toSource) {
        let doc = document.getElementById("estrte_input_field");
         let content;
      //   if (toSource) {
@@ -1941,14 +1963,15 @@ inputHtml = inputHtml.replace(/contenteditable=&quot;false&quot;/g, '');
 function estrte_remove_placeholder(){
 	let existingHTML;
 	let newHTML;
-	let elList = document.getElementsByTagName("*");
+	let elList = document.getElementById("estrte_input_field").getElementsByTagName("*");
 	for(let i = 0; i < elList.length; i++){
-		if(elList[i].innerHTML == '<span class="est_placeholder">-</div>'){
+if(elList[i].innerHTML == '<span class="est_placeholder">-</span>'){
 		let thisParentElementId = elList[i].id;
 existingHTML = document.getElementById(thisParentElementId).innerHTML;
-newHTML = existingHTML.replace('<span class="est_placeholder">-</div>', '');
+newHTML = existingHTML.replace('<span class="est_placeholder">-</span>', '');
 document.getElementById(thisParentElementId).innerHTML = newHTML;
 document.getElementById(thisParentElementId).removeEventListener("keydown", estrte_remove_placeholder, true);
+document.getElementById(thisParentElementId).removeEventListener("touchstart", estrte_remove_placeholder, true);
 return;
 		}
 	}
@@ -2479,7 +2502,7 @@ document.getElementById( "estrte_input_field").contentEditable = false;
   inserted_divs = document.getElementById("estrte_input_field").getElementsByClassName("inserted_div");
          inserted_divsLength = inserted_divs.length;
         newRangecont = elementsArray[elementsArray.length - 1];
-          elementsArray = [ "estrte_input_field"];
+          elementsArray = ["estrte_input_field"];
         for(let i = 0; i < inserted_divsLength; i++){
             elementsArray.push(inserted_divs[i].id);
 					}
@@ -3343,7 +3366,10 @@ for (let i = 0; i < estrte_fonts.length; i++) {
   document.getElementById("estrte_fontsSelect").innerHTML += '<option value="' + estrte_fonts[i] + '">' + estrte_fonts[i] + "</option>";
 }
 
-document.getElementById("estrte_select_color_label").addEventListener("click", estrte_show_select_color_div, true);
-document.getElementById("estrte_select_special_characters_label").addEventListener("click", estrte_show_select_special_characters_div, true);
-document.getElementById("estrte_select_emojis_label").addEventListener("click", estrte_show_select_estrte_emojis_div, true);
+document.getElementById("estrte_select_color_label").addEventListener("touchstart", estrte_show_select_color_div, true);
+document.getElementById("estrte_select_special_characters_label").addEventListener("touchstart", estrte_show_select_special_characters_div, true);
+document.getElementById("estrte_select_emojis_label").addEventListener("touchstart", estrte_show_select_estrte_emojis_div, true);
+document.getElementById("estrte_select_color_label").addEventListener("mousedown", estrte_show_select_color_div, true);
+document.getElementById("estrte_select_special_characters_label").addEventListener("mousedown", estrte_show_select_special_characters_div, true);
+document.getElementById("estrte_select_emojis_label").addEventListener("mousedown", estrte_show_select_estrte_emojis_div, true);
 document.getElementById("estrte_input_field").focus();

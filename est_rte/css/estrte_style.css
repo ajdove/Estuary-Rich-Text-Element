@@ -64,7 +64,7 @@ p{
     font-family: verdana, arial, sans-serif;
     border: var(--comment-input-border);
 }
-.estrte_toolbar{
+#estrte_toolbar{
 	width: 100%;
 	font-size: var(--toolbar-font-size);
 	font-family: var(--master-font-family);
@@ -72,6 +72,9 @@ p{
     border: var(--toolbar-border);
     background-color: var(--toolbar-background-color);
 	margin-bottom: 4px;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
 	
 }
 #estrte_toolbar_lower{
@@ -211,6 +214,10 @@ padding: 2px 8px 2px 8px;
 	display: inline-block;
 	width: 28px;
     margin-right: 1px;
+}
+.est_placeholder{
+font-size: 8px;
+color: #dcdcdc;
 }
 #estrte_select_estrte_emojis_div{
 	display: none;
