@@ -31,7 +31,7 @@ estrte_select_colour_div_html += '<input type="hidden" name="tempRed" id="tempRe
 estrte_select_colour_div_html += '</div>';
 estrte_select_colour_div_html += '</div>';
 estrte_select_colour_div_html += '<div class="estrte_colorPickerDivLower" id="estrte_colorPickerDivLower"><label class="estrte_setTextColorLabel" id="estrte_setTextColorLabelColor" onclick="estrte_setColor(\'color\')">Set Color</label>';
-estrte_select_colour_div_html += '<label class="estrte_setTextColorLabel" id="estrte_setTextColorLabelBgColor" onclick="estrte_setBackgroundColor()">Set Background</label></div></div>';
+estrte_select_colour_div_html += '<label class="estrte_setTextColorLabel" id="estrte_setTextColorLabelBgColor" onclick="estrte_setBackgroundColor()">Set Background</label></div><div class="close_window" title="Close" onclick="close_select_features_div()"><img src="/est_rte/images/close_menu.png" alt="" /></div>d</div>';
 
             let table_html = '<div class="table_spec_form" id="table_spec_form"><div class="spec_features_head">Table Properties<span class="close_window" title="Close" onclick="close_select_features_div()"><img src="/est_rte/images/close_menu.png" alt="" /></div></div>';
             table_html += '<div class="table_spec_row"><div class="table_spec_caption"><label>Heading</label></div><div class="table_spec_input"><input type="text" name="table_caption" id="table_caption" /></div></div>';
@@ -41,7 +41,7 @@ estrte_select_colour_div_html += '<label class="estrte_setTextColorLabel" id="es
             table_html += '<div class="table_spec_row"><div class="table_spec_caption"><label>Cell Spacing</label></div><div class="table_spec_input"><select name="cellspacing_select" id="cellspacing_select"></select></div></div>';
             table_html += '<div class="table_spec_row"><div class="table_spec_caption"><label>Cell Padding</label></div><div class="table_spec_input"><select name="cellpadding_select" id="cellpadding_select"></select></div></div>';
             table_html += '<div class="table_spec_row"><div class="table_spec_caption"><label>Headers</label></div><div class="table_spec_input"><select name="select_headers" id="select_headers"><option value="">None</option><option value="firstRow">First Row</option><option value="firstColumn">First Column</option><option value="both">Both</option></select></div></div>';
-            table_html += '<div class="table_spec_row"><div class="table_spec_caption"><label class="addTableButton" unselectable="on" onclick="add_table()">Add</label></div></div></div>';
+            table_html += '<div class="table_spec_row"><div class="table_spec_caption"><label class="addTableButton" unselectable="on" onclick="add_table()">Add</label></div></div><div class="close_window" title="Close" inputmode="none" unselectable="on" contentEditable = false inputmode="none" onclick="close_select_features_div()"><img src="/est_rte/images/close_menu.png" alt="" /></div></div>';
 
 
 
@@ -49,7 +49,7 @@ estrte_select_colour_div_html += '<label class="estrte_setTextColorLabel" id="es
 let link_html = '<div class="table_spec_form" id="link_spec_form"><div class="spec_features_head">Add Link<span class="close_window" title="Close" onclick="close_select_features_div()"><img src="/est_rte/images/close_menu.png" alt="" /></div></div>';
 link_html += '<div class="table_spec_row"><div class="table_spec_caption"><label>Text</label></div><div class="table_spec_input"><input type="text" name="link_text" id="link_text" /></div></div>';
 link_html += '<div class="table_spec_row"><div class="table_spec_caption"><label>URL</label></div><div class="table_spec_input"><input type="text" name="link_url" id="link_url" /></div></div>';
-link_html += '<div class="table_spec_row"><div class="table_spec_caption"><div class="table_spec_input"><label class="addTableButton" unselectable="on" onclick="add_link()">Add</label></div></div></div></div>';
+link_html += '<div class="table_spec_row"><div class="table_spec_caption"><div class="table_spec_input"><label class="addTableButton" unselectable="on" onclick="add_link()">Add</label></div></div></div><div class="close_window" title="Close" inputmode="none" unselectable="on" contentEditable = false inputmode="none" onclick="close_select_features_div()"><img src="/est_rte/images/close_menu.png" alt="" /></div></div>';
 
 
 /*  Styles included  */
@@ -1827,11 +1827,7 @@ function insertAfter(newNode, existingNode) {
           // IE9 + and non-IE
           sel = window.getSelection();
         parentElementId =  sel.anchorNode.parentElement.id;
-          alert("selection " + parentElementId);
-          
           if (sel.getRangeAt && sel.rangeCount) {
-          	alert("sofar");
-          	alert(sel.rangeCount);
             range = sel.getRangeAt(0);
             range.deleteContents();
             let el = document.createElement("div");
@@ -1883,20 +1879,15 @@ function insertAfter(newNode, existingNode) {
       }
 function generateEmojiIcon(emoji, title) {
         let date = new Date();
-   //     let unix = Math.round(+date / 1000);
+        let unix = Math.floor(Math.random() * 90000);
         input = document.createElement("input");
         input.type = "button";
-     //   input.id = unix;
+        input.id = unix;
         input.value = emoji;
         input.title = title;
         input.innerText = {emoji};//caption on button
-        input.addEventListener("click", function(){
-        let estrte_input_field = document.getElementById("estrte_input_field");
-        pasteHtmlAtCaret(emoji);
-        close_select_features_div();
-        });
         return input;
-}      
+}     
 function generateSpecialcharIcon(specChar) {
                     const date = new Date();
 const unix = Math.round(+date / 1000);
@@ -1907,7 +1898,6 @@ const unix = Math.round(+date / 1000);
         input.innerText = specChar;//caption on button
         input.addEventListener("click", function(){
         let estrte_input_field = document.getElementById("estrte_input_field");
-    //    estrte_input_field.focus();
         pasteHtmlAtCaret(`${specChar}`);
         close_select_features_div();
         });
@@ -2706,7 +2696,7 @@ document.getElementById("estrte_input_field").addEventListener("touchstart", fun
             let el = document.createElement("p");
             el.id = unix;
             el.className = "inserted_div";
-            el.innerHTML = '<span class="est_placeholder">-</div>';
+            el.innerHTML = '<span class="est_placeholder">-</span>';
             el.addEventListener("click", {stopPropagation: true});
             docFrag = document.createDocumentFragment();
             let node = el;
@@ -3037,7 +3027,7 @@ estrte_select_colour_div_html += '<input type="hidden" name="tempRed" id="tempRe
 estrte_select_colour_div_html += '</div>';
 estrte_select_colour_div_html += '</div>';
 estrte_select_colour_div_html += '<div class="estrte_colorPickerDivLower" id="estrte_colorPickerDivLower"><label class="estrte_setTextColorLabel" id="estrte_setTextColorLabelColor" onclick="estrte_setColor(\'color\')">Set Color</label>';
-estrte_select_colour_div_html += '<label class="estrte_setTextColorLabel" id="estrte_setTextColorLabelBgColor" onclick="estrte_setBackgroundColor()">Set Background</label></div></div>';
+estrte_select_colour_div_html += '<label class="estrte_setTextColorLabel" id="estrte_setTextColorLabelBgColor" onclick="estrte_setBackgroundColor()">Set Background</label></div><div class="close_window" title="Close" inputmode="none" unselectable="on" contentEditable = false inputmode="none" onclick="close_select_features_div()"><img src="/est_rte/images/close_menu.png" alt="" /></div></div>';
 document.getElementById("estrte_select_features_div").innerHTML = estrte_select_colour_div_html;
 let thisTarget = document.getElementById("estrte_select_features_div");
 slideDown("520px");
@@ -3080,12 +3070,23 @@ estrte_emojis.forEach((emoji) => {
 	}
 
       });
+document.getElementById("estrte_select_features_div").innerHTML += '<div class="close_window" title="Close" inputmode="none" unselectable="on" contentEditable = false inputmode="none" onclick="close_select_features_div()"><img src="/est_rte/images/close_menu.png" alt="" /></div>';
+
+let emojiButtons = document.getElementById("estrte_emojis_list").getElementsByTagName("input");
+for(let i = 0; i < emojiButtons.length; i++){
+	emojiButtons[i].addEventListener("click", function(event){
+        let estrte_input_field = document.getElementById("estrte_input_field");
+        pasteHtmlAtCaret(emojiButtons[i].value);
+        close_select_features_div();
+  event.stopPropagation();
+        });
+}
 }  
 
 function estrte_show_select_special_characters_div(){
     estrte_color_editing = false;
 slideDown("520px");
-document.getElementById("estrte_select_features_div").innerHTML = '<div class="table_spec_form" id="spec_chars_list"><div class="spec_features_head" class="spec_features_head">Special Chars<span class="close_window" title="Close" inputmode="none" unselectable="on" onclick="close_select_features_div()"><img src="/est_rte/images/close_menu.png" alt="" /></div></div><div class="estrte_special_charsInput" id="estrte_special_chars"></div></div>';
+document.getElementById("estrte_select_features_div").innerHTML = '<div class="table_spec_form" id="spec_chars_list"><div class="spec_features_head" class="spec_features_head">Special Chars<span class="close_window" title="Close" inputmode="none" unselectable="on" onclick="close_select_features_div()"><img src="/est_rte/images/close_menu.png" alt="" /></div></div><div class="estrte_special_charsInput" id="estrte_special_chars"></div><div class="close_window" title="Close" inputmode="none" unselectable="on" contentEditable = false inputmode="none" onclick="close_select_features_div()"><img src="/est_rte/images/close_menu.png" alt="" /></div></div>';
 let this_special_select_html = document.getElementById("estrte_select_features_div").innerHTML;
 document.getElementById("estrte_select_features_div").innerHTML = this_special_select_html;
 estrte_special_chars.forEach((specialChar) => {
