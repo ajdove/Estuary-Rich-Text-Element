@@ -3057,6 +3057,7 @@ for (let i = 0; i < estrte_lower_rgb_colors.length; i++) {
 }
 }
 function estrte_show_select_estrte_emojis_div(){
+	event.preventDefault();
     estrte_color_editing = false;
 slideDown("520px");
 document.getElementById("estrte_select_features_div").innerHTML = estrte_select_estrte_emojis_div_html;
@@ -3084,6 +3085,7 @@ for(let i = 0; i < emojiButtons.length; i++){
 }  
 
 function estrte_show_select_special_characters_div(){
+	event.preventDefault();
     estrte_color_editing = false;
 slideDown("520px");
 document.getElementById("estrte_select_features_div").innerHTML = '<div class="table_spec_form" id="spec_chars_list"><div class="spec_features_head" class="spec_features_head">Special Chars<span class="close_window" title="Close" inputmode="none" unselectable="on" onclick="close_select_features_div()"><img src="/est_rte/images/close_menu.png" alt="" /></div></div><div class="estrte_special_charsInput" id="estrte_special_chars"></div><div class="close_window" title="Close" inputmode="none" unselectable="on" contentEditable = false inputmode="none" onclick="close_select_features_div()"><img src="/est_rte/images/close_menu.png" alt="" /></div></div>';
