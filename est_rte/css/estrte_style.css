@@ -142,9 +142,18 @@ select{
 }
 .estrte_unit_input_select select{
 	width: 134px;
-	height: 29px;
-	font-size: 16px;
-	border: solid 1px #8b8b8b;
+	height: 36px;
+	font-size: 20px;
+	color: #ffffff;
+	float: right;
+	padding: 0px 2px 0px 6px;
+	margin: 12px 4px 12px 0px;
+	border: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: url("../images/select_arrow.png") 94% / 14% no-repeat #eee;
+	background-color: #3385ff;
 }
 .estrte_content_wrapper{
 	height: 100%;
@@ -213,7 +222,7 @@ padding: 2px 8px 2px 8px;
 .estrte_setColorUnit{
 	display: inline-block;
 	width: 28px;
-    margin-right: 1px;
+    margin-right: 8px;
 }
 .est_placeholder{
 font-size: 8px;

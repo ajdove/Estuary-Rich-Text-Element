@@ -1820,12 +1820,13 @@ function insertAfter(newNode, existingNode) {
        existingHTML =  document.getElementById("estrte_content_wrapper").innerHTML;
 	}
     
-        let sel, range;
+        let sel, cursorPos, range;
         let date = new Date();
         let unix = Math.round(+date / 1000);
         if (window.getSelection) {
           // IE9 + and non-IE
           sel = window.getSelection();
+          cursorPos = sel;
         parentElementId =  sel.anchorNode.parentElement.id;
           if (sel.getRangeAt && sel.rangeCount) {
             range = sel.getRangeAt(0);
@@ -1848,6 +1849,8 @@ function insertAfter(newNode, existingNode) {
           // IE < 9
           document.selection.createRange().pasteHTML(html);
         }  
+    estrte_input_field = document.getElementById("estrte_input_field");
+  if(ancestor(cursorPos, estrte_input_field)){
         estrte_input_field.focus();
   newHTML = document.getElementById("estrte_content_wrapper").innerHTML;
     new_log = {"pre_edit": existingHTML, "post_edit": newHTML, "type_of_edit": "text"};
@@ -1857,7 +1860,10 @@ function insertAfter(newNode, existingNode) {
 	newInputText = document.getElementById("estrte_content_wrapper").innerHTML; 
 	document.getElementById("estrte_content").value = estrte_sanitise_input_content(newInputText);
 	return;
-      }
+	}else{
+		return;
+	}
+}
 
       function addToDiv(event) {
         let emoji = event.target.value;
