@@ -114,6 +114,8 @@ select{
 }
 .estrte_toolbar_unit_cont{
 	display: inline-block;
+	vertical-align: text-top;
+    margin-top: 22px;
 }
 .estrte_unit_caption{
 	display: inline-block;
@@ -400,6 +402,7 @@ display: block;
 	display:none;
 }
 .estrte_setSetColorLabel{
+	display: inline-block;
 	width: 32px;
 	height: 32px;
 	cursor: pointer;
@@ -411,7 +414,7 @@ display: block;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    margin: 0 2px 1.5px 0;
+    margin: 0 2px;
 }
 .estrte_setTextColorLabel{
 	width: 32px;
@@ -488,10 +491,12 @@ padding: var(--input-padding);
     border: 1px solid #c9c9c9;
     width: 100%;
     overflow-y: overlay;
+    padding: 8px;
 }
 .estrte_emojis_category{
 	display: block;
 	color: var(--toolbar-caption-color);
+	margin-left: 8px;
 }
 .estrte_emojis_category_show input[type="button"]{
 	width: auto;
@@ -676,6 +681,11 @@ background-image: linear-gradient(to right, #797979, #d0d0d0);
 }
 .estrte_select_features_div{
     overflow-y: overlay;
+}
+.estrte_toolbar_unit_cont{
+	display: inline-block;
+	vertical-align: top;
+    margin-top: 2px;
 }
 .estrte_input_cont{
     width: 100%;

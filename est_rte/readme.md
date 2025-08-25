@@ -1,5 +1,3 @@
-I have made a few aesthetic changes.
-
 Estuary RTE (Rich Text Element) is an input component to be used as part of a HTML form. It is written completely in vanilla Javascript.
 
 TO INSTALL: Upload est_rte folder to root folder of project. On the page with the form which will contain the rich text editor: i) In the head element include: <link rel="stylesheet" href="est_rte/css/estrte_style.css">

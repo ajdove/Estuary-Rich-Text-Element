@@ -12,7 +12,7 @@ const estrte_emoji_categories = ["symbols", "faces", "people", "animals", "natur
 var estrte_textColor = getComputedStyle(document.getElementById("estrte_color_monitor")).getPropertyValue('--text-color');
 var estrte_textColorArray = estrte_textColor.substring(estrte_textColor.indexOf('(') + 1, estrte_textColor.indexOf(')')).split(",");
 
-let estrte_select_colour_div_html = '<div class="table_spec_form" id="link_spec_form"><div class="spec_features_head">Colours<div class="close_window" title="Close" onclick="close_select_features_div()"><img src="/est_rte/images/close_menu.png" alt="" /></div></div>';
+let estrte_select_colour_div_html = '<div class="table_spec_form" id="link_spec_form"><div class="spec_features_head">Colours<div class="close_window" title="Close" onclick="close_select_features_div()"><img src="est_rte/images/close_menu.png" alt="" /></div></div>';
 estrte_select_colour_div_html +='<div class="estrte_color_pallette" id="estrte_color_pallette">';
 estrte_select_colour_div_html += '<div class="estrte_colorRowCont"><div id="estrte_setColorRow"></div>';
 estrte_select_colour_div_html += '<div class="estrte_LowerSetColorRow" id="estrte_lowerSetColorRow"></div>';
@@ -31,9 +31,9 @@ estrte_select_colour_div_html += '<input type="hidden" name="tempRed" id="tempRe
 estrte_select_colour_div_html += '</div>';
 estrte_select_colour_div_html += '</div>';
 estrte_select_colour_div_html += '<div class="estrte_colorPickerDivLower" id="estrte_colorPickerDivLower"><label class="estrte_setTextColorLabel" id="estrte_setTextColorLabelColor" onclick="estrte_setColor(\'color\')">Set Color</label>';
-estrte_select_colour_div_html += '<label class="estrte_setTextColorLabel" id="estrte_setTextColorLabelBgColor" onclick="estrte_setBackgroundColor()">Set Background</label></div><div class="close_window" title="Close" onclick="close_select_features_div()"><img src="/est_rte/images/close_menu.png" alt="" /></div>d</div>';
+estrte_select_colour_div_html += '<label class="estrte_setTextColorLabel" id="estrte_setTextColorLabelBgColor" onclick="estrte_setBackgroundColor()">Set Background</label></div><div class="close_window" title="Close" onclick="close_select_features_div()"><img src="est_rte/images/close_menu.png" alt="" /></div>d</div>';
 
-            let table_html = '<div class="table_spec_form" id="table_spec_form"><div class="spec_features_head">Table Properties<span class="close_window" title="Close" onclick="close_select_features_div()"><img src="/est_rte/images/close_menu.png" alt="" /></div></div>';
+            let table_html = '<div class="table_spec_form" id="table_spec_form"><div class="spec_features_head">Table Properties<span class="close_window" title="Close" onclick="close_select_features_div()"><img src="est_rte/images/close_menu.png" alt="" /></div></div>';
             table_html += '<div class="table_spec_row"><div class="table_spec_caption"><label>Heading</label></div><div class="table_spec_input"><input type="text" name="table_caption" id="table_caption" /></div></div>';
             table_html += '<div class="table_spec_row"><div class="table_spec_caption"><label>Rows</label></div><div class="table_spec_input"><select name="no_of_rows_select" id="no_of_rows_select"></select></div></div>';
             table_html += '<div class="table_spec_row"><div class="table_spec_caption"><label>Columns</label></div><div class="table_spec_input"><select name="no_of_columns_select" id="no_of_columns_select"></select></div></div>';
@@ -41,15 +41,15 @@ estrte_select_colour_div_html += '<label class="estrte_setTextColorLabel" id="es
             table_html += '<div class="table_spec_row"><div class="table_spec_caption"><label>Cell Spacing</label></div><div class="table_spec_input"><select name="cellspacing_select" id="cellspacing_select"></select></div></div>';
             table_html += '<div class="table_spec_row"><div class="table_spec_caption"><label>Cell Padding</label></div><div class="table_spec_input"><select name="cellpadding_select" id="cellpadding_select"></select></div></div>';
             table_html += '<div class="table_spec_row"><div class="table_spec_caption"><label>Headers</label></div><div class="table_spec_input"><select name="select_headers" id="select_headers"><option value="">None</option><option value="firstRow">First Row</option><option value="firstColumn">First Column</option><option value="both">Both</option></select></div></div>';
-            table_html += '<div class="table_spec_row"><div class="table_spec_caption"><label class="addTableButton" unselectable="on" onclick="add_table()">Add</label></div></div><div class="close_window" title="Close" inputmode="none" unselectable="on" contentEditable = false inputmode="none" onclick="close_select_features_div()"><img src="/est_rte/images/close_menu.png" alt="" /></div></div>';
+            table_html += '<div class="table_spec_row"><div class="table_spec_caption"><label class="addTableButton" unselectable="on" onclick="add_table()">Add</label></div></div><div class="close_window" title="Close" inputmode="none" unselectable="on" contentEditable = false inputmode="none" onclick="close_select_features_div()"><img src="est_rte/images/close_menu.png" alt="" /></div></div>';
 
 
 
 
-let link_html = '<div class="table_spec_form" id="link_spec_form"><div class="spec_features_head">Add Link<span class="close_window" title="Close" onclick="close_select_features_div()"><img src="/est_rte/images/close_menu.png" alt="" /></div></div>';
+let link_html = '<div class="table_spec_form" id="link_spec_form"><div class="spec_features_head">Add Link<span class="close_window" title="Close" onclick="close_select_features_div()"><img src="est_rte/images/close_menu.png" alt="" /></div></div>';
 link_html += '<div class="table_spec_row"><div class="table_spec_caption"><label>Text</label></div><div class="table_spec_input"><input type="text" name="link_text" id="link_text" /></div></div>';
 link_html += '<div class="table_spec_row"><div class="table_spec_caption"><label>URL</label></div><div class="table_spec_input"><input type="text" name="link_url" id="link_url" /></div></div>';
-link_html += '<div class="table_spec_row"><div class="table_spec_caption"><div class="table_spec_input"><label class="addTableButton" unselectable="on" onclick="add_link()">Add</label></div></div></div><div class="close_window" title="Close" inputmode="none" unselectable="on" contentEditable = false inputmode="none" onclick="close_select_features_div()"><img src="/est_rte/images/close_menu.png" alt="" /></div></div>';
+link_html += '<div class="table_spec_row"><div class="table_spec_caption"><div class="table_spec_input"><label class="addTableButton" unselectable="on" onclick="add_link()">Add</label></div></div></div><div class="close_window" title="Close" inputmode="none" unselectable="on" contentEditable = false inputmode="none" onclick="close_select_features_div()"><img src="est_rte/images/close_menu.png" alt="" /></div></div>';
 
 
 /*  Styles included  */
@@ -1756,7 +1756,7 @@ let estrte_prevAdd = 'no';
 let table_spec_active = false;
 let link_spec_active = false;
 let estrte_color_editing = false;
-let estrte_select_estrte_emojis_div_html = '<div class="table_spec_form" id="link_spec_form"><div class="spec_features_head">Emojis<span class="close_window" title="Close" onclick="close_select_features_div()"><img src="/est_rte/images/close_menu.png" alt="" /></div></div><div id="estrte_emojis"></div></div>';
+let estrte_select_estrte_emojis_div_html = '<div class="table_spec_form" id="link_spec_form"><div class="spec_features_head">Emojis<span class="close_window" title="Close" onclick="close_select_features_div()"><img src="est_rte/images/close_menu.png" alt="" /></div></div><div id="estrte_emojis"></div></div>';
 let estrte_emojis_list = '<div id="estrte_emojis_list"><div class="estrte_emojis_category" id="emojisgeneral" inputmode="none" unselectable="on"><div class="estrte_emojis_category_show" id="emojis_showgeneral"></div></div>';
 for (let i = 0; i < estrte_emoji_categories.length; i++) {
       var category = estrte_emoji_categories[i];
@@ -3014,7 +3014,7 @@ function  estrte_show_select_color_div(){
     estrte_color_editing = false;
 var estrte_textColor = getComputedStyle(document.getElementById("estrte_color_monitor")).getPropertyValue('--text-color');
 var estrte_textColorArray = estrte_textColor.substring(estrte_textColor.indexOf('(') + 1, estrte_textColor.indexOf(')')).split(",");
-let estrte_select_colour_div_html = '<div class="table_spec_form" id="color_select_form" style="position:relative;" contenteditable="false"  unselectable="on" inputmode="none"><div class="spec_features_head" class="spec_features_head" contenteditable="false"  unselectable="on" inputmode="none">Colours<div class="close_window" title="Close" inputmode="none" unselectable="on" contentEditable = false inputmode="none" onclick="close_select_features_div()"><img src="/est_rte/images/close_menu.png" alt="" /></div></div>';
+let estrte_select_colour_div_html = '<div class="table_spec_form" id="color_select_form" style="position:relative;" contenteditable="false"  unselectable="on" inputmode="none"><div class="spec_features_head" class="spec_features_head" contenteditable="false"  unselectable="on" inputmode="none">Colours<div class="close_window" title="Close" inputmode="none" unselectable="on" contentEditable = false inputmode="none" onclick="close_select_features_div()"><img src="est_rte/images/close_menu.png" alt="" /></div></div>';
 estrte_select_colour_div_html +='<div class="estrte_color_pallette" id="estrte_color_pallette" contenteditable="false" unselectable="on" inputmode="none">';
 estrte_select_colour_div_html += '<div class="estrte_colorRowCont"><div class="estrte_setColorRow" id="estrte_setColorRow" contenteditable="false"  unselectable="on" inputmode="none"></div>';
 estrte_select_colour_div_html += '<div class="estrte_lowerSetColorRow" class="estrte_lowerSetColorRow" id="estrte_lowerSetColorRow" contenteditable="false"  unselectable="on" inputmode="none"></div>';
@@ -3033,7 +3033,7 @@ estrte_select_colour_div_html += '<input type="hidden" name="tempRed" id="tempRe
 estrte_select_colour_div_html += '</div>';
 estrte_select_colour_div_html += '</div>';
 estrte_select_colour_div_html += '<div class="estrte_colorPickerDivLower" id="estrte_colorPickerDivLower"><label class="estrte_setTextColorLabel" id="estrte_setTextColorLabelColor" onclick="estrte_setColor(\'color\')">Set Color</label>';
-estrte_select_colour_div_html += '<label class="estrte_setTextColorLabel" id="estrte_setTextColorLabelBgColor" onclick="estrte_setBackgroundColor()">Set Background</label></div><div class="close_window" title="Close" inputmode="none" unselectable="on" contentEditable = false inputmode="none" onclick="close_select_features_div()"><img src="/est_rte/images/close_menu.png" alt="" /></div></div>';
+estrte_select_colour_div_html += '<label class="estrte_setTextColorLabel" id="estrte_setTextColorLabelBgColor" onclick="estrte_setBackgroundColor()">Set Background</label></div><div class="close_window" title="Close" inputmode="none" unselectable="on" contentEditable = false inputmode="none" onclick="close_select_features_div()"><img src="est_rte/images/close_menu.png" alt="" /></div></div>';
 document.getElementById("estrte_select_features_div").innerHTML = estrte_select_colour_div_html;
 let thisTarget = document.getElementById("estrte_select_features_div");
 slideDown("520px");
@@ -3077,7 +3077,7 @@ estrte_emojis.forEach((emoji) => {
 	}
 
       });
-document.getElementById("estrte_select_features_div").innerHTML += '<div class="close_window" title="Close" inputmode="none" unselectable="on" contentEditable = false inputmode="none" onclick="close_select_features_div()"><img src="/est_rte/images/close_menu.png" alt="" /></div>';
+document.getElementById("estrte_select_features_div").innerHTML += '<div class="close_window" title="Close" inputmode="none" unselectable="on" contentEditable = false inputmode="none" onclick="close_select_features_div()"><img src="est_rte/images/close_menu.png" alt="" /></div>';
 
 let emojiButtons = document.getElementById("estrte_emojis_list").getElementsByTagName("input");
 for(let i = 0; i < emojiButtons.length; i++){
@@ -3094,7 +3094,7 @@ function estrte_show_select_special_characters_div(){
 	event.preventDefault();
     estrte_color_editing = false;
 slideDown("520px");
-document.getElementById("estrte_select_features_div").innerHTML = '<div class="table_spec_form" id="spec_chars_list"><div class="spec_features_head" class="spec_features_head">Special Chars<span class="close_window" title="Close" inputmode="none" unselectable="on" onclick="close_select_features_div()"><img src="/est_rte/images/close_menu.png" alt="" /></div></div><div class="estrte_special_charsInput" id="estrte_special_chars"></div><div class="close_window" title="Close" inputmode="none" unselectable="on" contentEditable = false inputmode="none" onclick="close_select_features_div()"><img src="/est_rte/images/close_menu.png" alt="" /></div></div>';
+document.getElementById("estrte_select_features_div").innerHTML = '<div class="table_spec_form" id="spec_chars_list"><div class="spec_features_head" class="spec_features_head">Special Chars<span class="close_window" title="Close" inputmode="none" unselectable="on" onclick="close_select_features_div()"><img src="est_rte/images/close_menu.png" alt="" /></div></div><div class="estrte_special_charsInput" id="estrte_special_chars"></div><div class="close_window" title="Close" inputmode="none" unselectable="on" contentEditable = false inputmode="none" onclick="close_select_features_div()"><img src="est_rte/images/close_menu.png" alt="" /></div></div>';
 let this_special_select_html = document.getElementById("estrte_select_features_div").innerHTML;
 document.getElementById("estrte_select_features_div").innerHTML = this_special_select_html;
 estrte_special_chars.forEach((specialChar) => {
