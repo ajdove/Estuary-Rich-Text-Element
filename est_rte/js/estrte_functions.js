@@ -1978,6 +1978,7 @@ function estrte_set_current_style(styleToAdd, newValue){
 }
       
 function estrte_add_style(styleToAdd, newValue){
+	event.preventDefault();
 estrte_remove_placeholder();
     estrte_color_editing = false;
   let estrte_prevDelete = 'no';
@@ -2109,6 +2110,15 @@ new_log = {"pre_edit": origInputText, "post_edit": newInputText, "type_of_edit":
 			document.getElementById("estrte_fontSizeSelect").value = "";
  	document.getElementById("estrte_undo").style.display = "inline-block";
  	document.getElementById("estrte_undo").innerHTML = "Undo";
+ 	document.getElementById("estrte_undo").addEventListener("mouseover", function () {
+  document.getElementById("estrte_undo").style.color = "#0000ff";
+  document.getElementById("estrte_undo").style.zIndex = "42";
+  document.getElementById("estrte_undo").style.fontWeight = "bold";
+});
+ 	document.getElementById("estrte_undo").addEventListener("mouseout", function () {
+  document.getElementById("estrte_undo").style.color = "#576168";
+  document.getElementById("estrte_undo").style.fontWeight = "normal";
+});
 	
 	        if (window.getSelection){
 	            range = window.getSelection().removeAllRanges();   	
@@ -2121,6 +2131,7 @@ new_log = {"pre_edit": origInputText, "post_edit": newInputText, "type_of_edit":
 		let number_of_edits = estrte_fragments_log.length;
  }
 function estrte_format(styleToAdd){
+	event.preventDefault();
 estrte_remove_placeholder();
   let estrte_color_editing = false;
   let existingHTML;
@@ -2358,6 +2369,7 @@ new_log = {"pre_edit": origInputText, "post_edit": newInputText, "type_of_edit":
 		existingHTML = document.getElementById("estrte_input_field").innerHTML;
  }
 function estrte_setColor(todo){
+	event.preventDefault();
   let estrte_to_focus;
   let estrte_prevDelete = 'no';
   let estrte_prevAdd = 'no';
@@ -2607,6 +2619,7 @@ new_log = {"pre_edit": origInputText, "post_edit": newInputText, "type_of_edit":
 }
 }
  function estrte_add_paragraph(){
+	event.preventDefault();
   let selectedText;
   let origInputText;
   let newInputText;
@@ -2752,6 +2765,7 @@ new_log = {"pre_edit": origInputText, "post_edit": newInputText, "type_of_edit":
 }
  
 function estrte_undo(){
+	event.preventDefault();
     estrte_color_editing = false;
 	let editFrom = estrte_fragments_log[0].post_edit;
 	let editTo = estrte_fragments_log[0].pre_edit;
@@ -2772,11 +2786,21 @@ let new_undo_log = {"pre_edit": editFrom, "post_edit": editTo, "type_of_edit": "
  }else{
  	document.getElementById("estrte_redo").innerHTML = "Redo ";
  	document.getElementById("estrte_redo").style.display = "inline-block";
+ 	document.getElementById("estrte_redo").addEventListener("mouseover", function () {
+  document.getElementById("estrte_redo").style.color = "#0000ff";
+  document.getElementById("estrte_redo").style.zIndex = "42";
+  document.getElementById("estrte_redo").style.fontWeight = "bold";
+});
+ 	document.getElementById("estrte_redo").addEventListener("mouseout", function () {
+  document.getElementById("estrte_redo").style.color = "#576168";
+  document.getElementById("estrte_redo").style.fontWeight = "normal";
+});
 	}
            document.getElementById("estrte_content_wrapper").style.backgroundColor = document.getElementById("estrte_input_field").style.backgroundColor;
            document.getElementById("estrte_input_cont").style.backgroundColor = document.getElementById("estrte_input_field").style.backgroundColor;
 }
 function estrte_redo(){
+	event.preventDefault();
     estrte_color_editing = false;
 	 let editTo = estrte_undo_log[0].post_edit;
 	let editFrom = estrte_undo_log[0].pre_edit;
@@ -2804,6 +2828,7 @@ estrte_fragments_log.unshift(new_log);
 }
 
 function add_table(){
+	event.preventDefault();
   let selectedText;
   let origInputText;
   let newInputText;
@@ -2923,6 +2948,7 @@ new_log = {"pre_edit": origInputText, "post_edit": newInputText, "type_of_edit":
 }
 
 function add_link(){
+	event.preventDefault();
   let selectedText;
   let origInputText;
   let newInputText;
@@ -3010,6 +3036,7 @@ new_log = {"pre_edit": origInputText, "post_edit": newInputText, "type_of_edit":
  	close_select_features_div();
 }
 function  estrte_show_select_color_div(){
+	event.preventDefault();
 //  getCaretPosition(document.getElementById("estrte_input_field"));
     estrte_color_editing = false;
 var estrte_textColor = getComputedStyle(document.getElementById("estrte_color_monitor")).getPropertyValue('--text-color');
@@ -3041,6 +3068,7 @@ slideDown("520px");
 estrte_populate_colour_div('');
  }
 function estrte_populate_colour_div(holder){
+	event.preventDefault();
     estrte_color_editing = false;
     let thisId;
     document.getElementById("estrte_setColorRow" + holder).innerHTML = '';
@@ -3106,6 +3134,7 @@ estrte_special_chars.forEach((specialChar) => {
 }
 
 function estrte_show_table_spec_div(){
+	event.preventDefault();
 slideDown("520px");
 document.getElementById("estrte_select_features_div").innerHTML = table_html;
 for (let i = 1; i <= estrte_number_of_table_row_options; i++) {
@@ -3125,11 +3154,13 @@ for (let i = 1; i <= estrte_number_of_table_column_options; i++) {
 }
 }
 function estrte_show_select_link_div(){
+	event.preventDefault();
 document.getElementById("estrte_select_features_div").style.display = "block";
 	    document.getElementById("estrte_select_features_div").innerHTML = link_html;
 }
 
  function estrte_setShade(){
+	event.preventDefault();
  	let redValue;
  	let greenValue;
  	let blueValue;
@@ -3179,6 +3210,7 @@ document.getElementById("estrte_select_features_div").style.display = "block";
  }
  
  function estrte_setBackgroundColor(){
+	event.preventDefault();
  	let origInputText;
  	let newInputText;
  	if(estrte_fragments_log.length > 0){
@@ -3211,6 +3243,7 @@ document.getElementById("estrte_select_features_div").style.display = "block";
  }
  
  function estrte_setSetColor(red, green, blue, alpha){
+	event.preventDefault();
  	let newColor
   	document.getElementById("redComp").value = red;
  	document.getElementById("greenComp").value = green;
@@ -3225,6 +3258,7 @@ document.getElementById("estrte_select_features_div").style.display = "block";
 }
  
  function estrte_setContentColor(){
+	event.preventDefault();
  	let red = document.getElementById("redComp").value;
  	let green = document.getElementById("greenComp").value;
  	let blue = document.getElementById("blueComp").value;
@@ -3237,6 +3271,7 @@ document.getElementById("estrte_select_features_div").style.display = "block";
  }
  function estrte_setContentShade()
  {
+	event.preventDefault();
  	let redValue;
  	let greenValue;
  	let blueValue;
@@ -3275,6 +3310,7 @@ document.getElementById("estrte_select_features_div").style.display = "block";
  }
 
 function close_select_features_div(){
+	event.preventDefault();
 let target = document.getElementById("estrte_select_features_div");
 target.style.height = "400px";;
 target.style.transitionProperty = 'height, margin, padding'; /* [1.1] */
@@ -3359,6 +3395,15 @@ if(estrte_fragments_log.length > 0){
 	estrte_fragments_log.unshift(new_log);
  	document.getElementById("estrte_undo").style.display = "inline-block";
  	document.getElementById("estrte_undo").innerHTML = "Undo";
+ 	document.getElementById("estrte_undo").addEventListener("mouseover", function () {
+  document.getElementById("estrte_undo").style.color = "#0000ff";
+  document.getElementById("estrte_undo").style.zIndex = "42";
+  document.getElementById("estrte_undo").style.fontWeight = "bold";
+});
+ 	document.getElementById("estrte_undo").addEventListener("mouseout", function () {
+  document.getElementById("estrte_undo").style.color = "#576168";
+  document.getElementById("estrte_undo").style.fontWeight = "normal";
+});
 	newInputText = document.getElementById("estrte_content_wrapper").innerHTML;
 	document.getElementById("estrte_content").value = estrte_sanitise_input_content(newInputText);
 

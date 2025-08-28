@@ -7,6 +7,7 @@
   --master-font-family: verdana, arial, sans-serif;
   --toolbar-font-family: verdana, arial, sans-serif;
   --label-text-color: #464e54;
+  --label-hover-color: #0000ff;
   --heading-text-color:#8f8f8f;
   --input-background-color: #f5faf5;
   --background-theme-color: #ffffff;
@@ -48,6 +49,7 @@ p{
     margin-top: 3px;
     margin-bottom: 3px;
 	}
+
 .estrte_cont{
     width: 100%;
     background-color: var(--background-theme-color);
@@ -89,6 +91,11 @@ label{
   -ms-user-select: none; /* IE 10 and IE 11 */
   user-select: none; /* Standard syntax */
   }
+label :hover{
+	color: var(--label-hover-color);
+	z-index: 42;
+	font-weight: bold;
+}
 select{
   width: 100%;
   min-width: 12ch;
@@ -131,7 +138,26 @@ select{
     width: 42px;
     display: inline-block;
     text-align: center;
+	color: var(--toolbar-caption-color);
     padding: 3px 2px 3px 2px;
+    cursor: pointer;
+}
+.estrte_unit_input_hidden{
+	display: none;
+    text-align: center;
+	color: var(--toolbar-caption-color);
+	padding: 3px 6px 3px 6px;
+    cursor: pointer;
+}
+.estrte_unit_input :hover{
+	color: var(--label-hover-color);
+	z-index: 42;
+	font-weight: bold;
+}
+.estrte_unit_input_hidden :hover{
+	color: var(--label-hover-color);
+	z-index: 42;
+	font-weight: bold;
 }
 .estrte_unit_input label{
 	display: inline-block;
@@ -482,6 +508,7 @@ padding: var(--input-padding);
 .estrte_colorLabel{
 	display: inline-block;
 	color: var(--text-color)! important;
+	background-color: #ffffff;
 }
 .add_emoji{
 	
@@ -492,6 +519,10 @@ padding: var(--input-padding);
     width: 100%;
     overflow-y: overlay;
     padding: 8px;
+}
+.estrte_select_special_characters_label{
+	color: var(--label-text-color);
+	background-color: #ffffff;
 }
 .estrte_emojis_category{
 	display: block;
